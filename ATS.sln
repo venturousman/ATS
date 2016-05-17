@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATS.BackOffice", "ATS.BackOffice\ATS.BackOffice.csproj", "{AC798501-C9D8-4635-885B-D105CB4F939A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATS.FrontOffice", "ATS.FrontOffice\ATS.FrontOffice.csproj", "{6A8C6B0C-35B0-4C0D-A7B5-275808B21969}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{D86928F7-19AF-4D9B-A219-9C6361F49EB2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
