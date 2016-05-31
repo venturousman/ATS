@@ -342,6 +342,16 @@
     </Content>
     <None Include="Project_Readme.html" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ATS.Data\ATS.Data.csproj">
+      <Project>{f4d382ae-3f34-47ff-aaab-05a4e80695c2}</Project>
+      <Name>ATS.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ATS.Model\ATS.Model.csproj">
+      <Project>{e1dad1fb-8893-4461-9420-c793572bf868}</Project>
+      <Name>ATS.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
