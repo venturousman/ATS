@@ -1,0 +1,49 @@
+﻿@using (Html.BeginForm("UploadEmployeeGlobal", "Upload", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="custom-file-upload row">
+        <div class="col-md-8">
+            <label for="file">Upload employee global: </label>
+            <input type="file" id="dataFile" name="upload" accept=".xlsx" />
+        </div>
+        <div class="col-md-4">
+            <input type="submit" value="Update" class="btn btn-primary" />
+        </div>
+    </div>
+}
+
+@using (Html.BeginForm("UploadTrainingDataGlobal", "Upload", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="custom-file-upload row">
+        <div class="col-md-8">
+            <label for="file">Upload training global: </label>
+            <input type="file" id="dataFileDataTraining" name="upload" accept=".xlsx" />
+        </div>
+        <div class="col-md-4">
+            <input type="submit" value="Update" class="btn btn-primary" />
+        </div>
+    </div>
+    <div>
+
+    </div>
+
+}
+
+<script>
+    
+</script>
+<style>
+    .custom-file-upload {
+        display: block;
+        width: auto;
+        font-size: 16px;
+        margin-top: 30px;
+        //border: 1px solid #ccc;
+        label;
+
+    {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    }
+</style>
