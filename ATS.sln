@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+VisualStudioVersion = 12.0.40418.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATS.BackOffice", "ATS.BackOffice\ATS.BackOffice.csproj", "{AC798501-C9D8-4635-885B-D105CB4F939A}"
 EndProject
@@ -18,6 +18,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATS.Data", "ATS.Data\ATS.Data.csproj", "{F4D382AE-3F34-47FF-AAAB-05A4E80695C2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATS.Model", "ATS.Model\ATS.Model.csproj", "{E1DAD1FB-8893-4461-9420-C793572BF868}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATS.Service", "ATS.Service\ATS.Service.csproj", "{1B705F65-606B-4D9A-B6F0-54F656F0F741}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 		{E1DAD1FB-8893-4461-9420-C793572BF868}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1DAD1FB-8893-4461-9420-C793572BF868}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1DAD1FB-8893-4461-9420-C793572BF868}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B705F65-606B-4D9A-B6F0-54F656F0F741}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B705F65-606B-4D9A-B6F0-54F656F0F741}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B705F65-606B-4D9A-B6F0-54F656F0F741}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B705F65-606B-4D9A-B6F0-54F656F0F741}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
