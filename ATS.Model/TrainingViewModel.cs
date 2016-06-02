@@ -8,5 +8,6 @@ namespace ATS.Model
 {
     public class TrainingViewModel
     {
+        public Guid ID { get; set; }
     }
 }
