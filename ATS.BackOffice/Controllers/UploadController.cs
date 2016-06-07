@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Excel;
+using ATS.Data;
 
 namespace ATS.BackOffice.Controllers
 {
@@ -51,6 +52,13 @@ namespace ATS.BackOffice.Controllers
 
                         DataSet employeeGlobal = reader.AsDataSet();
                         reader.Close();
+
+                        if (employeeGlobal.Tables.Count > 0)
+                        {
+                            DataTable dataTable = new DataTable();
+                            dataTable = employeeGlobal.Tables[0];
+                            UpdateEmployeeGlobal(dataTable);
+                        }
                     }
                     else
                     {
@@ -66,6 +74,18 @@ namespace ATS.BackOffice.Controllers
             }
         }
 
+        private void UpdateEmployeeGlobal(DataTable dataTable)
+        {
+            using (var context = new ATSEntities())
+            {
+                foreach (DataRow item in dataTable.Rows)
+                {
+                    context.EmployeeGlobals.Add(new EmployeeGlobal(item.ItemArray));
+                }
+                context.SaveChanges();
+            }
+          
+        }
 
         public ActionResult UploadTrainingDataGlobal(HttpPostedFileBase upload)
         {
@@ -112,6 +132,19 @@ namespace ATS.BackOffice.Controllers
 
                 throw;
             }
+        }
+
+        private void UpdateTrainingDataGlobal(DataTable dataTable)
+        {
+            using (var context = new ATSEntities())
+            {
+                foreach (DataRow item in dataTable.Rows)
+                {
+                    //context.Schedules.Add(new Schedules(item.ItemArray));
+                }
+                context.SaveChanges();
+            }
+
         }
     }
 }

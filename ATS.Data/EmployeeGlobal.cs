@@ -11,7 +11,7 @@ namespace ATS.Data
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class EmployeeGlobal
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,7 +19,31 @@ namespace ATS.Data
         {
             this.Employees = new HashSet<Employee>();
         }
-    
+
+        public EmployeeGlobal(object[] obj)
+        {
+            GlobalID = Convert.ToInt32(obj[5].ToString());
+            string[] name = obj[7].ToString().Split(' ');
+            if (name.Length > 1)
+            {
+                LastName = name[name.Length - 1].ToString();
+                FirstName = name[0].ToString();
+            }
+            else
+            {
+                FirstName = (name[0] != null) ? (name[0].ToString()) : "";
+            }
+            OrganizationID = obj[6].ToString() != null ? Convert.ToInt32(obj[6].ToString()) : new Nullable<int>();
+            //LegalEntity
+            EmpStatus = obj[1].ToString();
+            EmpType = obj[2].ToString();
+            //Initiator
+            CreateDate = DateTime.Today;
+            Supervisor = Convert.ToInt32( obj[14].ToString());
+            EmailAddress = obj[17].ToString();
+            ModifiedBy = "4010";
+        }
+
         public int GlobalID { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
@@ -32,7 +56,7 @@ namespace ATS.Data
         public int Supervisor { get; set; }
         public string EmailAddress { get; set; }
         public string ModifiedBy { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Employee> Employees { get; set; }
         public virtual Organization Organization { get; set; }
