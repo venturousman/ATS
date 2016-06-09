@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using Excel;
 using ATS.Data;
+using System.Data.SqlClient;
 
 namespace ATS.BackOffice.Controllers
 {
@@ -76,15 +77,45 @@ namespace ATS.BackOffice.Controllers
 
         private void UpdateEmployeeGlobal(DataTable dataTable)
         {
-            using (var context = new ATSEntities())
+            try
             {
-                foreach (DataRow item in dataTable.Rows)
+                dataTable.Columns[0].ColumnName = "UserID";
+                dataTable.Columns[1].ColumnName = "EmpStatus";
+                dataTable.Columns[2].ColumnName = "EmpType";
+                dataTable.Columns[3].ColumnName = "JobLocation";
+                dataTable.Columns[4].ColumnName = "JobCode";
+                dataTable.Columns[5].ColumnName = "DomainID";
+                dataTable.Columns[7].ColumnName = "UserName";
+                dataTable.Columns[11].ColumnName = "State";
+                dataTable.Columns[12].ColumnName = "PostsalCode";
+                dataTable.Columns[15].ColumnName = "HireDate";
+                dataTable.Columns[17].ColumnName = "Email";
+                dataTable.Columns[18].ColumnName = "HasAccess";
+                dataTable.Columns[20].ColumnName = "RegionID";
+                dataTable.Columns[21].ColumnName = "RoleID";
+                dataTable.Columns[22].ColumnName = "ProfileStatus";
+                dataTable.Columns[23].ColumnName = "PositionID";
+                dataTable.Columns[24].ColumnName = "IsFullTime";
+                dataTable.Columns[25].ColumnName = "NativeDeeplinkUser";
+                dataTable.Columns[25].ColumnName = "GamificationUserID";
+                dataTable.Columns[25].ColumnName = "Regular";
+
+                using (var context = new ATSEntities())
                 {
-                    context.EmployeeGlobals.Add(new EmployeeGlobal(item.ItemArray));
+                    var param = new SqlParameter("@DataTable", SqlDbType.Structured);
+                    param.Value = dataTable;
+                    param.TypeName = "GlobalEmployee";
+
+                    context.Database.ExecuteSqlCommand("EXEC USP_IMPORT_GLOBALEMPLOYEE @DataTable", param);
                 }
-                context.SaveChanges();
             }
-          
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
+
         }
 
         public ActionResult UploadTrainingDataGlobal(HttpPostedFileBase upload)
@@ -119,6 +150,13 @@ namespace ATS.BackOffice.Controllers
 
                         DataSet dataTrainingGlobal = reader.AsDataSet();
                         reader.Close();
+
+                        if (dataTrainingGlobal.Tables.Count > 0)
+                        {
+                            DataTable dataTable = new DataTable();
+                            dataTable = dataTrainingGlobal.Tables[0];
+                            UpdateTrainingDataGlobal(dataTable);
+                        }
                     }
                     else
                     {
@@ -136,15 +174,39 @@ namespace ATS.BackOffice.Controllers
 
         private void UpdateTrainingDataGlobal(DataTable dataTable)
         {
-            using (var context = new ATSEntities())
+            try
             {
-                foreach (DataRow item in dataTable.Rows)
-                {
-                    //context.Schedules.Add(new Schedules(item.ItemArray));
-                }
-                context.SaveChanges();
-            }
+                dataTable.Columns[0].ColumnName = "ScheduledOfferingID";
+                dataTable.Columns[2].ColumnName = "ItemType";
+                dataTable.Columns[3].ColumnName = "ItemID";
+                dataTable.Columns[4].ColumnName = "RevisionDate";
+                dataTable.Columns[5].ColumnName = "RevisionNumber";
+                dataTable.Columns[6].ColumnName = "Seg";
+                dataTable.Columns[8].ColumnName = "StartDate";
+                dataTable.Columns[9].ColumnName = "EndDate";
+                dataTable.Columns[10].ColumnName = "InstructorFirstName";
+                dataTable.Columns[11].ColumnName = "InstructorLastName";
+                dataTable.Columns[12].ColumnName = "InstructorMiddleName";
+                dataTable.Columns[14].ColumnName = "GlobalID";
+                dataTable.Columns[15].ColumnName = "LastName";
+                dataTable.Columns[16].ColumnName = "FirstName";
+                dataTable.Columns[17].ColumnName = "MiddleName";
+                dataTable.Columns[19].ColumnName = "Legal Entity";
 
+                using (var context = new ATSEntities())
+                {
+                    var param = new SqlParameter("@DataTable", SqlDbType.Structured);
+                    param.Value = dataTable;
+                    param.TypeName = "TrainingBasicData";
+
+                    context.Database.ExecuteSqlCommand("EXEC USP_IMPORT_TRAININGBASICDATA @DataTable", param);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
     }
 }
