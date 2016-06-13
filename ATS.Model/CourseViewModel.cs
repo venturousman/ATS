@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace ATS.Model
 {
-    public class TrainingViewModel
+    public class CourseViewModel
     {
         public Guid ID { get; set; }
+        public String Name { get; set; }
     }
 }
