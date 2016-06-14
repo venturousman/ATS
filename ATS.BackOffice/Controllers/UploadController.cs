@@ -68,7 +68,7 @@ namespace ATS.BackOffice.Controllers
                 }
                 return View("Index");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
@@ -109,7 +109,7 @@ namespace ATS.BackOffice.Controllers
                     context.Database.ExecuteSqlCommand("EXEC USP_IMPORT_GLOBALEMPLOYEE @DataTable", param);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
@@ -182,8 +182,8 @@ namespace ATS.BackOffice.Controllers
                 dataTable.Columns[4].ColumnName = "RevisionDate";
                 dataTable.Columns[5].ColumnName = "RevisionNumber";
                 dataTable.Columns[6].ColumnName = "Seg";
-                dataTable.Columns[8].ColumnName = "StartDate";
-                dataTable.Columns[9].ColumnName = "EndDate";
+                dataTable.Columns[8].ColumnName = "StartTime";
+                dataTable.Columns[9].ColumnName = "EndTime";
                 dataTable.Columns[10].ColumnName = "InstructorFirstName";
                 dataTable.Columns[11].ColumnName = "InstructorLastName";
                 dataTable.Columns[12].ColumnName = "InstructorMiddleName";
@@ -193,8 +193,21 @@ namespace ATS.BackOffice.Controllers
                 dataTable.Columns[17].ColumnName = "MiddleName";
                 dataTable.Columns[19].ColumnName = "Legal Entity";
 
+                //for (int i = 0; i < dataTable.Rows.Count; i++)
+                //{
+                //    for (int j = 0; j < dataTable.Rows[i].ItemArray.Count(); j++)
+                //    {
+                //        if (dataTable.Rows[i].ItemArray[j].GetType() == typeof(DBNull))
+                //        {
+                //            dataTable.Rows[i].ItemArray[j] = "N/A";
+                //        }
+                //    }
+                //}
+
                 using (var context = new ATSEntities())
                 {
+                    context.Database.Connection.Open();
+
                     var param = new SqlParameter("@DataTable", SqlDbType.Structured);
                     param.Value = dataTable;
                     param.TypeName = "TrainingBasicData";
