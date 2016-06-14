@@ -13,38 +13,45 @@ using System.Data.Entity;
 
 namespace ATS.BackOffice.Controllers
 {
-    public class TrainingController : ApiController
+    public class CourseController : ApiController
     {
         private ATSEntities db = new ATSEntities();
 
-        // GET: api/Training
-        public IQueryable<TrainingViewModel> Get()
-        {
-            //return new string[] { "value1", "value2" };
-            var trainings = from t in db.TrainingEmployees
-                            select new TrainingViewModel()
-                            {
-                                ID = t.ID,
-                            };
+        CourseViewModel[] mCourses = new CourseViewModel[] 
+        { 
+            new CourseViewModel { ID = Guid.NewGuid(), Name = "Math" }, 
+            new CourseViewModel { ID = Guid.NewGuid(), Name = "English" },
+            new CourseViewModel { ID = Guid.NewGuid(), Name = "Japanese" },
+        };
 
-            return trainings;
+        // GET: api/Course
+        public IQueryable<CourseViewModel> Get()
+        {
+            //var courses = from t in db.Courses
+            //                select new CourseViewModel()
+            //                {
+            //                    ID = t.ID,
+            //                };
+
+            //return courses;
+            return mCourses.AsQueryable();
         }
 
-        // GET: api/Training/5
-        [ResponseType(typeof(TrainingViewModel))]
+        // GET: api/Course/5
+        [ResponseType(typeof(CourseViewModel))]
         public async Task<IHttpActionResult> Get(Guid id)
         {
-            var training = await db.TrainingEmployees.Include(t => t.Schedule).Select(t =>
-                new TrainingViewModel()
+            var course = await db.Courses.Include(c => c.Schedules).Select(t =>
+                new CourseViewModel()
                 {
                     ID = t.ID,
                 }).SingleOrDefaultAsync(t => t.ID == id);
-            if (training == null)
+            if (course == null)
             {
                 return NotFound();
             }
 
-            return Ok(training);
+            return Ok(course);
 
             //TrainingEmployee trainingEmployee = await db.TrainingEmployees.FindAsync(id);
             //if (trainingEmployee == null)
@@ -60,21 +67,21 @@ namespace ATS.BackOffice.Controllers
             //return Ok(training);
         }
 
-        // POST: api/Training        
-        [ResponseType(typeof(TrainingViewModel))]
-        public async Task<IHttpActionResult> Post(TrainingViewModel training)
+        // POST: api/Course        
+        [ResponseType(typeof(CourseViewModel))]
+        public async Task<IHttpActionResult> Post(CourseViewModel course)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var trainingEmployee = new TrainingEmployee
+            var _course = new Course
             {
-                ID = training.ID
+                ID = course.ID
             };
 
-            db.TrainingEmployees.Add(trainingEmployee);
+            db.Courses.Add(_course);
 
             try
             {
@@ -82,7 +89,7 @@ namespace ATS.BackOffice.Controllers
             }
             catch (DbUpdateException)
             {
-                if (TrainingExists(trainingEmployee.ID))
+                if (CourseExists(_course.ID))
                 {
                     return Conflict();
                 }
@@ -92,30 +99,30 @@ namespace ATS.BackOffice.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = trainingEmployee.ID }, trainingEmployee);
+            return CreatedAtRoute("DefaultApi", new { id = _course.ID }, _course);
         }
 
-        // PUT: api/Training/5        
+        // PUT: api/Course/5        
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> Put(Guid id, TrainingViewModel training)
+        public async Task<IHttpActionResult> Put(Guid id, CourseViewModel course)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != training.ID)
+            if (id != course.ID)
             {
                 return BadRequest();
             }
 
-            TrainingEmployee trainingEmployee = await db.TrainingEmployees.FindAsync(id);
-            if (trainingEmployee == null)
+            Course _course = await db.Courses.FindAsync(id);
+            if (_course == null)
             {
                 return NotFound();
             }
 
-            db.Entry(trainingEmployee).State = EntityState.Modified;
+            db.Entry(_course).State = EntityState.Modified;
 
             try
             {
@@ -123,7 +130,7 @@ namespace ATS.BackOffice.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TrainingExists(id))
+                if (!CourseExists(id))
                 {
                     return NotFound();
                 }
@@ -136,20 +143,20 @@ namespace ATS.BackOffice.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // DELETE: api/Training/5
-        [ResponseType(typeof(TrainingViewModel))]
+        // DELETE: api/Course/5
+        [ResponseType(typeof(CourseViewModel))]
         public async Task<IHttpActionResult> Delete(Guid id)
         {
-            TrainingEmployee trainingEmployee = await db.TrainingEmployees.FindAsync(id);
-            if (trainingEmployee == null)
+            Course _course = await db.Courses.FindAsync(id);
+            if (_course == null)
             {
                 return NotFound();
             }
 
-            db.TrainingEmployees.Remove(trainingEmployee);
+            db.Courses.Remove(_course);
             await db.SaveChangesAsync();
 
-            return Ok(trainingEmployee);
+            return Ok(_course);
         }
 
         protected override void Dispose(bool disposing)
@@ -161,9 +168,9 @@ namespace ATS.BackOffice.Controllers
             base.Dispose(disposing);
         }
 
-        private bool TrainingExists(Guid id)
+        private bool CourseExists(Guid id)
         {
-            return db.TrainingEmployees.Count(e => e.ID == id) > 0;
+            return db.Courses.Count(e => e.ID == id) > 0;
         }
     }
 }
