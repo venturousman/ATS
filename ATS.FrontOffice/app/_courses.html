@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Courses</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../Content/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Courses</h2>
+        <p>The .table-hover class enables a hover state on table rows:</p>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <!--<th>ID</th>-->
+                    <th>Name</th>
+                    <th>#</th>
+                </tr>
+            </thead>
+            <tbody id="myBody">
+                <!--<tr>
+                    <td>John</td>
+                    <td>Doe</td>
+                    <td>john@example.com</td>
+                </tr>
+                <tr>
+                    <td>Mary</td>
+                    <td>Moe</td>
+                    <td>mary@example.com</td>
+                </tr>
+                <tr>
+                    <td>July</td>
+                    <td>Dooley</td>
+                    <td>july@example.com</td>
+                </tr>-->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="../Scripts/jquery-2.2.3.js"></script>
+    <script src="../Scripts/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var _url = 'http://localhost:54543/api/Course';
+            $.ajax({
+                url: _url,
+                type: 'GET',
+                dataType: 'json',
+                success: function (courses) {
+                    var strResult = "";
+                    $.each(courses, function (index, course) {
+                        //strResult += "<tr><td>" + course.id + "</td><td> " + course.name + "</td><td></td></tr>";
+                        strResult += "<tr><td>" + course.name + "</td><td>" + "<a href='#'><span class='glyphicon glyphicon-edit'></span></a>" + "<a href='#'><span class='glyphicon glyphicon-list'></span></a>" + "</td></tr>";
+                    });
+                    //strResult += "</table>";
+                    $("#myBody").html(strResult);
+                },
+                error: function (xhr, status, error) {
+                    alert(error);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

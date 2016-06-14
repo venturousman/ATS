@@ -2,13 +2,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
-    <title>Training manager</title>
+    <title>Attendance Tracking System</title>
     <!-- data-main attribute tells require.js to load scripts/main.js after require.js loads. -->
-    <script data-main="main" src="../Scripts/require.js"></script>
     <!--<script src="../Scripts/angular.js"></script>-->
 </head>
-<body>
+<body ng-controller="shell">
     <p>Nothing here {{'yet' + '!'}}</p>
     <p>1 + 2 = {{1 + 2}}</p>
+    <div ui-view></div>
+    <script type="text/javascript">
+        var require = {
+            urlArgs: "v=" 
+        };
+    </script>
+    <script data-main="main" src="../Scripts/require.js"></script>
 </body>
 </html>
