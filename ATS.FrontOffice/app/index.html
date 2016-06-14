@@ -6,13 +6,13 @@
     <!-- data-main attribute tells require.js to load scripts/main.js after require.js loads. -->
     <!--<script src="../Scripts/angular.js"></script>-->
 </head>
-<body ng-controller="courses">
+<body ng-controller="shell">
     <p>Nothing here {{'yet' + '!'}}</p>
     <p>1 + 2 = {{1 + 2}}</p>
     <div ui-view></div>
     <script type="text/javascript">
         var require = {
-            urlArgs: "v=1"
+            urlArgs: "v=" 
         };
     </script>
     <script data-main="main" src="../Scripts/require.js"></script>

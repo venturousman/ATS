@@ -8,7 +8,7 @@ var appConfigs = {
     version: 1,
     baseUrl: 'app',
     //modules: ['common', 'localization', 'shell', 'attendanceTrackingSystem']
-    modules: ['common', 'attendanceTrackingSystem']
+    modules: ['common', 'shell','attendanceTrackingSystem']
 }
 
 // require js configuration

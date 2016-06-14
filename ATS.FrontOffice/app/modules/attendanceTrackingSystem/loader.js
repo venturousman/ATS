@@ -24,14 +24,15 @@ define(['modules/attendanceTrackingSystem/configs/require'], function () {
 
         // here we do our configure for login Module with syntax(url, moduleName, pageName, controllerName)
         $stateProvider
-            .state('attendanceTrackingSystem', route.resolve('/attendanceTrackingSystem', 'attendanceTrackingSystem', 'courses', 'courses'));
+            .state('attendanceTrackingSystem', route.resolve('/courses', 'attendanceTrackingSystem', 'courses', 'courses'))
+            .state('test', route.resolve('/test', 'attendanceTrackingSystem', 'test', 'test'));
             //.state('digitalWorkshop.dashboard', route.resolve('/dashboard', 'digitalWorkshop', 'dashboard', 'dashboard'))
             //.state('digitalWorkshop.appointments', route.resolve('/appointments', 'digitalWorkshop', 'appointments', 'appointments'))
             //.state('digitalWorkshop.appointmentDetail', route.resolve('/appointmentDetail', 'digitalWorkshop', 'appointmentDetail', 'appointmentDetail'))
             //.state('digitalWorkshop.jobCards', route.resolve('/jobCards', 'digitalWorkshop', 'jobCards', 'jobCards'))
             //.state('digitalWorkshop.spareParts', route.resolve('/spareParts', 'digitalWorkshop', 'spareParts', 'spareParts'))
             //.state('digitalWorkshop.contacts', route.resolve('/contacts', 'digitalWorkshop', 'contacts', 'contacts'));
-        $urlRouterProvider.otherwise('/attendanceTrackingSystem/courses');
+        $urlRouterProvider.otherwise('/attendanceTrackingSystem');
         //// remove hashtag from angular urls
         //if (window.history && window.history.pushState) {
         //    $locationProvider.html5Mode({ enabled: true, requireBase: false });
