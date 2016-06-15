@@ -20,10 +20,10 @@ namespace ATS.Data
             this.Leaves = new HashSet<Leave>();
         }
     
-        public System.Guid ID { get; set; }
+        public System.Guid ReasonID { get; set; }
         public string Name { get; set; }
-        public System.DateTime CreatedDate { get; set; }
         public string Initiator { get; set; }
+        public System.DateTime CreatedDate { get; set; }
         public bool IsActive { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

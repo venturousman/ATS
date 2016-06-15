@@ -20,31 +20,20 @@ namespace ATS.Data
             this.Segments = new HashSet<Segment>();
             this.TrainingEmployees = new HashSet<TrainingEmployee>();
         }
-
-        public Schedule(object[] obj)
-        {
-            ID = Convert.ToInt32(obj[3].ToString());
-            StartTime = Convert.ToDateTime(obj[8].ToString());
-            EndTime = Convert.ToDateTime(obj[9].ToString());
-            ////TeacherID = 
-            ////Initiator=
-            //MinPeople = 
-            //    MaxPeople = 
-
-        }
-
-        public int ID { get; set; }
+    
+        public int ScheduleID { get; set; }
         public System.DateTime StartTime { get; set; }
         public System.DateTime EndTime { get; set; }
         public System.Guid TeacherID { get; set; }
-        public System.DateTime CreatedDate { get; set; }
-        public string Initiator { get; set; }
         public Nullable<int> MinPeople { get; set; }
         public Nullable<int> MaxPeople { get; set; }
         public System.Guid CourseID { get; set; }
-        public string ModifiedBy { get; set; }
-        public string Note { get; set; }
         public string CourseName { get; set; }
+        public string Note { get; set; }
+        public string Initiator { get; set; }
+        public System.DateTime CreatedDate { get; set; }
+        public string ModifiedBy { get; set; }
+        public System.DateTime ModifiedDate { get; set; }
     
         public virtual Course Course { get; set; }
         public virtual Teacher Teacher { get; set; }

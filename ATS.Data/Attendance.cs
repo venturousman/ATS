@@ -14,20 +14,20 @@ namespace ATS.Data
     
     public partial class Attendance
     {
-        public System.Guid ID { get; set; }
-        public int SegmentID { get; set; }
+        public System.Guid AttendantID { get; set; }
+        public System.Guid SegmentID { get; set; }
         public System.Guid RoomID { get; set; }
+        public string RoomName { get; set; }
         public string EmployeeID { get; set; }
         public Nullable<System.DateTime> TimeIn { get; set; }
         public Nullable<System.DateTime> TimeOut { get; set; }
         public string FullName { get; set; }
         public Nullable<int> ScheduleID { get; set; }
+        public string CourseName { get; set; }
         public string OrganizationName { get; set; }
         public string Supervisor { get; set; }
-        public System.DateTime Date { get; set; }
+        public System.DateTime AttendantDate { get; set; }
         public bool IsManual { get; set; }
-        public string CourseName { get; set; }
-        public string RoomName { get; set; }
     
         public virtual Employee Employee { get; set; }
         public virtual Room Room { get; set; }

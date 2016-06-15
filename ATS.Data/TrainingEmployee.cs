@@ -14,7 +14,7 @@ namespace ATS.Data
     
     public partial class TrainingEmployee
     {
-        public System.Guid ID { get; set; }
+        public System.Guid TrainingEmployeeID { get; set; }
         public int ScheduleID { get; set; }
         public string EmployeeID { get; set; }
         public Nullable<System.DateTime> StopFrom { get; set; }

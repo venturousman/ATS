@@ -21,11 +21,11 @@ namespace ATS.Data
             this.UserRoles = new HashSet<UserRole>();
         }
     
-        public System.Guid ID { get; set; }
+        public System.Guid RoleID { get; set; }
         public string Name { get; set; }
-        public bool IsActive { get; set; }
-        public System.DateTime CreatedDate { get; set; }
         public string Initiator { get; set; }
+        public System.DateTime CreatedDate { get; set; }
+        public bool IsActive { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RoleMapping> RoleMappings { get; set; }

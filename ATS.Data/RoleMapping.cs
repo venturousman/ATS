@@ -15,13 +15,12 @@ namespace ATS.Data
     public partial class RoleMapping
     {
         public System.Guid RoleID { get; set; }
-        public bool IsActive { get; set; }
-        public System.DateTime CreatedDate { get; set; }
+        public System.Guid MenuID { get; set; }
         public string Initiator { get; set; }
+        public System.DateTime CreatedDate { get; set; }
         public string ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
-        public System.Guid ID { get; set; }
-        public Nullable<System.Guid> MenuID { get; set; }
+        public bool IsActive { get; set; }
     
         public virtual ApplicationMenu ApplicationMenu { get; set; }
         public virtual Role Role { get; set; }

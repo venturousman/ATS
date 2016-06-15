@@ -20,7 +20,7 @@ namespace ATS.Data
             this.EmployeeGlobals = new HashSet<EmployeeGlobal>();
         }
     
-        public int ID { get; set; }
+        public int OrganizationID { get; set; }
         public string OrganizationName { get; set; }
         public bool IsActive { get; set; }
     

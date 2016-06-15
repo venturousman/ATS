@@ -12,12 +12,15 @@ namespace ATS.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class CardReaderMaster
+    public partial class TerminalMaster
     {
-        public string Id { get; set; }
+        public System.Guid TerminalID { get; set; }
         public Nullable<System.Guid> RoomId { get; set; }
-        public Nullable<System.DateTime> CreateDate { get; set; }
-        public string Initiator { get; set; }
+        public int Initiator { get; set; }
+        public System.DateTime CreateDate { get; set; }
+        public Nullable<int> ModifiedBy { get; set; }
+        public Nullable<System.DateTime> ModifiedDate { get; set; }
+        public bool IsActive { get; set; }
     
         public virtual Room Room { get; set; }
     }

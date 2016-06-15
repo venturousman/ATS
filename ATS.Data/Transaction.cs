@@ -14,11 +14,11 @@ namespace ATS.Data
     
     public partial class Transaction
     {
-        public System.Guid ID { get; set; }
+        public System.Guid TransactionID { get; set; }
+        public string EmployeeID { get; set; }
         public string CardID { get; set; }
         public System.DateTime Time { get; set; }
-        public string RoomID { get; set; }
+        public System.Guid RoomID { get; set; }
         public bool InOut { get; set; }
-        public string EmployeeID { get; set; }
     }
 }

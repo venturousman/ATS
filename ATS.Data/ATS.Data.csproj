@@ -71,9 +71,6 @@
     <Compile Include="Attendance.cs">
       <DependentUpon>ATSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="CardReaderMaster.cs">
-      <DependentUpon>ATSModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Course.cs">
       <DependentUpon>ATSModel.tt</DependentUpon>
     </Compile>
@@ -109,6 +106,9 @@
       <DependentUpon>ATSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Teacher.cs">
+      <DependentUpon>ATSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TerminalMaster.cs">
       <DependentUpon>ATSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TrainingEmployee.cs">

@@ -20,11 +20,10 @@ namespace ATS.Data
             this.Schedules = new HashSet<Schedule>();
         }
     
-        public System.Guid ID { get; set; }
+        public System.Guid CourseID { get; set; }
         public string Name { get; set; }
-        public bool IsActive { get; set; }
         public string Note { get; set; }
-        public string Title { get; set; }
+        public bool IsActive { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Schedule> Schedules { get; set; }

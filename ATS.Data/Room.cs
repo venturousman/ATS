@@ -18,24 +18,25 @@ namespace ATS.Data
         public Room()
         {
             this.Attendances = new HashSet<Attendance>();
-            this.CardReaderMasters = new HashSet<CardReaderMaster>();
             this.Segments = new HashSet<Segment>();
+            this.TerminalMasters = new HashSet<TerminalMaster>();
         }
     
-        public System.Guid ID { get; set; }
+        public System.Guid RoomID { get; set; }
         public string Name { get; set; }
         public Nullable<int> MaxPeople { get; set; }
         public string Position { get; set; }
-        public System.DateTime CreatedDate { get; set; }
         public string Initiator { get; set; }
+        public System.DateTime CreatedDate { get; set; }
         public string ModifiedBy { get; set; }
+        public Nullable<System.DateTime> ModifiedDate { get; set; }
         public bool IsActive { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Attendance> Attendances { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CardReaderMaster> CardReaderMasters { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Segment> Segments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TerminalMaster> TerminalMasters { get; set; }
     }
 }

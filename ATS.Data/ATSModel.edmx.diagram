@@ -5,43 +5,43 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="d9815fff307349f8b571e09d6df1902e" Name="Diagram1" ZoomLevel="74">
-        <EntityTypeShape EntityType="ATSDataModel.ApplicationMenu" Width="1.5" PointX="8.25" PointY="19.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ATSDataModel.Attendance" Width="1.5" PointX="7.5" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ATSDataModel.CardReaderMaster" Width="1.5" PointX="7.5" PointY="23.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ATSDataModel.Course" Width="1.5" PointX="6" PointY="2.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ATSDataModel.Employee" Width="1.5" PointX="5.25" PointY="6.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ATSDataModel.EmployeeGlobal" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="ATSDataModel.Leave" Width="1.5" PointX="10.5" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ATSDataModel.Organization" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
-        <EntityTypeShape EntityType="ATSDataModel.Reason" Width="1.5" PointX="8.25" PointY="11.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ATSDataModel.Role" Width="1.5" PointX="8.25" PointY="15.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ATSDataModel.RoleMapping" Width="1.5" PointX="10.5" PointY="15.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ATSDataModel.Room" Width="1.5" PointX="5.25" PointY="17" IsExpanded="true" />
-        <EntityTypeShape EntityType="ATSDataModel.Schedule" Width="1.5" PointX="8.25" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ATSDataModel.Segment" Width="1.5" PointX="5.25" PointY="20.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ATSDataModel.Teacher" Width="1.5" PointX="6" PointY="12.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ATSDataModel.TrainingEmployee" Width="1.5" PointX="10.5" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ATSDataModel.Transaction" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ATSDataModel.UserRole" Width="1.5" PointX="10.5" PointY="11.625" IsExpanded="true" />
-        <AssociationConnector Association="ATSDataModel.FK_RoleMapping_ApplicationMenu" ManuallyRouted="false" />
-        <AssociationConnector Association="ATSDataModel.FK_Attendance_EmployeeCard" ManuallyRouted="false" />
-        <AssociationConnector Association="ATSDataModel.FK_Attendence_RoomMaster" ManuallyRouted="false" />
-        <AssociationConnector Association="ATSDataModel.FK_Attendence_SegmentDetail" ManuallyRouted="false" />
-        <AssociationConnector Association="ATSDataModel.FK_CarReaderMaster_RoomMaster" ManuallyRouted="false" />
-        <AssociationConnector Association="ATSDataModel.FK_Scheduled_CourseMaster" ManuallyRouted="false" />
-        <AssociationConnector Association="ATSDataModel.FK_CardEmployeeMaster_EmployeeGlobalMaster" ManuallyRouted="false" />
-        <AssociationConnector Association="ATSDataModel.FK_Leave_EmployeeCard" ManuallyRouted="false" />
-        <AssociationConnector Association="ATSDataModel.FK_TrainingEmployee_EmployeeCard" ManuallyRouted="false" />
-        <AssociationConnector Association="ATSDataModel.FK_UserRole_Employee" ManuallyRouted="false" />
-        <AssociationConnector Association="ATSDataModel.FK_EmployeeGlobal_Organization" ManuallyRouted="false" />
-        <AssociationConnector Association="ATSDataModel.FK_Leave_Segment" ManuallyRouted="false" />
-        <AssociationConnector Association="ATSDataModel.FK_LeaveMaster_ReasonMaster" ManuallyRouted="false" />
-        <AssociationConnector Association="ATSDataModel.FK_RoleMapping_RoleMaster" ManuallyRouted="false" />
-        <AssociationConnector Association="ATSDataModel.FK_UserRole_Role" ManuallyRouted="false" />
-        <AssociationConnector Association="ATSDataModel.FK_SegmentDetail_RoomMaster" ManuallyRouted="false" />
-        <AssociationConnector Association="ATSDataModel.FK_Scheduled_TeacherMaster" ManuallyRouted="false" />
-        <AssociationConnector Association="ATSDataModel.FK_SegmentDetail_Scheduled1" ManuallyRouted="false" />
-        <AssociationConnector Association="ATSDataModel.FK_TrainingEmployee_Scheduled" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ATSDataModel.ApplicationMenu" Width="1.5" PointX="8.25" PointY="23.625" />
+        <EntityTypeShape EntityType="ATSDataModel.Attendance" Width="1.5" PointX="7.5" PointY="12.75" />
+        <EntityTypeShape EntityType="ATSDataModel.Course" Width="1.5" PointX="3" PointY="5.625" />
+        <EntityTypeShape EntityType="ATSDataModel.Employee" Width="1.5" PointX="5.25" PointY="7.5" />
+        <EntityTypeShape EntityType="ATSDataModel.EmployeeGlobal" Width="1.5" PointX="3" PointY="8.375" />
+        <EntityTypeShape EntityType="ATSDataModel.Leave" Width="1.5" PointX="10.5" PointY="8.125" />
+        <EntityTypeShape EntityType="ATSDataModel.Organization" Width="1.5" PointX="0.75" PointY="9" />
+        <EntityTypeShape EntityType="ATSDataModel.Reason" Width="1.5" PointX="8.25" PointY="1.625" />
+        <EntityTypeShape EntityType="ATSDataModel.Role" Width="1.5" PointX="5.25" PointY="13.75" />
+        <EntityTypeShape EntityType="ATSDataModel.RoleMapping" Width="1.5" PointX="10.5" PointY="13.5" />
+        <EntityTypeShape EntityType="ATSDataModel.Room" Width="1.5" PointX="6" PointY="18.75" />
+        <EntityTypeShape EntityType="ATSDataModel.Schedule" Width="1.5" PointX="5.25" PointY="0.75" />
+        <EntityTypeShape EntityType="ATSDataModel.Segment" Width="1.5" PointX="8.25" PointY="18.5" />
+        <EntityTypeShape EntityType="ATSDataModel.Teacher" Width="1.5" PointX="3" PointY="12.375" />
+        <EntityTypeShape EntityType="ATSDataModel.TerminalMaster" Width="1.5" PointX="8.25" PointY="27.125" />
+        <EntityTypeShape EntityType="ATSDataModel.TrainingEmployee" Width="1.5" PointX="7.5" PointY="4.75" />
+        <EntityTypeShape EntityType="ATSDataModel.Transaction" Width="1.5" PointX="0.75" PointY="1.5" />
+        <EntityTypeShape EntityType="ATSDataModel.UserRole" Width="1.5" PointX="7.5" PointY="8.5" />
+        <AssociationConnector Association="ATSDataModel.FK_RoleMapping_ApplicationMenu" />
+        <AssociationConnector Association="ATSDataModel.FK_Attendance_EmployeeCard" />
+        <AssociationConnector Association="ATSDataModel.FK_Attendence_Room" />
+        <AssociationConnector Association="ATSDataModel.FK_Attendence_SegmentDetail" />
+        <AssociationConnector Association="ATSDataModel.FK_Scheduled_CourseMaster" />
+        <AssociationConnector Association="ATSDataModel.FK_CardEmployeeMaster_EmployeeGlobalMaster" />
+        <AssociationConnector Association="ATSDataModel.FK_Leave_EmployeeCard" />
+        <AssociationConnector Association="ATSDataModel.FK_TrainingEmployee_EmployeeCard" />
+        <AssociationConnector Association="ATSDataModel.FK_UserRole_Employee" />
+        <AssociationConnector Association="ATSDataModel.FK_EmployeeGlobal_Organization" />
+        <AssociationConnector Association="ATSDataModel.FK_Leave_Segment" />
+        <AssociationConnector Association="ATSDataModel.FK_LeaveMaster_ReasonMaster" />
+        <AssociationConnector Association="ATSDataModel.FK_RoleMapping_RoleMaster" />
+        <AssociationConnector Association="ATSDataModel.FK_UserRole_Role" />
+        <AssociationConnector Association="ATSDataModel.FK_SegmentDetail_RoomMaster" />
+        <AssociationConnector Association="ATSDataModel.FK_TerminalMaster_RoomMaster" />
+        <AssociationConnector Association="ATSDataModel.FK_Scheduled_TeacherMaster" />
+        <AssociationConnector Association="ATSDataModel.FK_SegmentDetail_Scheduled1" />
+        <AssociationConnector Association="ATSDataModel.FK_TrainingEmployee_Scheduled" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

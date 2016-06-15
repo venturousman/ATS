@@ -21,17 +21,16 @@ namespace ATS.Data
             this.Leaves = new HashSet<Leave>();
         }
     
-        public int ID { get; set; }
+        public System.Guid SegmentID { get; set; }
         public int ScheduleID { get; set; }
+        public string CourseName { get; set; }
         public System.DateTime StartTime { get; set; }
         public System.DateTime EndTime { get; set; }
-        public string Description { get; set; }
         public System.Guid RoomID { get; set; }
-        public bool IsActive { get; set; }
-        public System.DateTime Date { get; set; }
         public string Note { get; set; }
-        public string CourseName { get; set; }
         public string Item { get; set; }
+        public System.DateTime Date { get; set; }
+        public bool IsActive { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Attendance> Attendances { get; set; }

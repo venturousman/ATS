@@ -44,7 +44,7 @@ namespace ATS.BackOffice.Controllers
             var course = await db.Courses.Include(c => c.Schedules).Select(t =>
                 new CourseViewModel()
                 {
-                    ID = t.ID,
+                    ID = t.CourseID,
                 }).SingleOrDefaultAsync(t => t.ID == id);
             if (course == null)
             {
@@ -78,7 +78,7 @@ namespace ATS.BackOffice.Controllers
 
             var _course = new Course
             {
-                ID = course.ID
+                CourseID = course.ID
             };
 
             db.Courses.Add(_course);
@@ -89,7 +89,7 @@ namespace ATS.BackOffice.Controllers
             }
             catch (DbUpdateException)
             {
-                if (CourseExists(_course.ID))
+                if (CourseExists(_course.CourseID))
                 {
                     return Conflict();
                 }
@@ -99,7 +99,7 @@ namespace ATS.BackOffice.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = _course.ID }, _course);
+            return CreatedAtRoute("DefaultApi", new { id = _course.CourseID }, _course);
         }
 
         // PUT: api/Course/5        
@@ -170,7 +170,7 @@ namespace ATS.BackOffice.Controllers
 
         private bool CourseExists(Guid id)
         {
-            return db.Courses.Count(e => e.ID == id) > 0;
+            return db.Courses.Count(e => e.CourseID == id) > 0;
         }
     }
 }

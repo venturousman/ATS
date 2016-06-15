@@ -20,13 +20,13 @@ namespace ATS.Data
             this.RoleMappings = new HashSet<RoleMapping>();
         }
     
-        public System.Guid ID { get; set; }
+        public System.Guid ApplicationMenuID { get; set; }
         public string Name { get; set; }
         public string ParentCode { get; set; }
         public string Controller { get; set; }
-        public bool IsActive { get; set; }
-        public string Initiator { get; set; }
+        public int Initiator { get; set; }
         public System.DateTime CreatedDate { get; set; }
+        public bool IsActive { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RoleMapping> RoleMappings { get; set; }

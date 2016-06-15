@@ -23,20 +23,21 @@ namespace ATS.Data
             this.UserRoles = new HashSet<UserRole>();
         }
     
-        public int GlobalID { get; set; }
-        public string CardID { get; set; }
-        public string ID { get; set; }
-        public System.DateTime CreatedDate { get; set; }
-        public string Initiator { get; set; }
+        public string EmployeeID { get; set; }
+        public Nullable<int> GlobalID { get; set; }
+        public Nullable<int> CardID { get; set; }
         public string EmailAddress { get; set; }
         public string NTID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string ModifiedBy { get; set; }
+        public string MiddleName { get; set; }
         public string OrganizationName { get; set; }
-        public bool IsActive { get; set; }
         public string Supervisor { get; set; }
-        public string status { get; set; }
+        public string Initiator { get; set; }
+        public System.DateTime CreatedDate { get; set; }
+        public string ModifiedBy { get; set; }
+        public Nullable<System.DateTime> ModifiedDate { get; set; }
+        public bool IsActive { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Attendance> Attendances { get; set; }

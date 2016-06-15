@@ -12,6 +12,8 @@ namespace ATS.Data
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class ATSEntities : DbContext
     {
@@ -27,7 +29,6 @@ namespace ATS.Data
     
         public virtual DbSet<ApplicationMenu> ApplicationMenus { get; set; }
         public virtual DbSet<Attendance> Attendances { get; set; }
-        public virtual DbSet<CardReaderMaster> CardReaderMasters { get; set; }
         public virtual DbSet<Course> Courses { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<EmployeeGlobal> EmployeeGlobals { get; set; }
@@ -40,8 +41,19 @@ namespace ATS.Data
         public virtual DbSet<Schedule> Schedules { get; set; }
         public virtual DbSet<Segment> Segments { get; set; }
         public virtual DbSet<Teacher> Teachers { get; set; }
+        public virtual DbSet<TerminalMaster> TerminalMasters { get; set; }
         public virtual DbSet<TrainingEmployee> TrainingEmployees { get; set; }
         public virtual DbSet<Transaction> Transactions { get; set; }
         public virtual DbSet<UserRole> UserRoles { get; set; }
+    
+        public virtual int USP_IMPORT_GLOBALEMPLOYEE()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("USP_IMPORT_GLOBALEMPLOYEE");
+        }
+    
+        public virtual int USP_IMPORT_TRAININGBASICDATA()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("USP_IMPORT_TRAININGBASICDATA");
+        }
     }
 }
