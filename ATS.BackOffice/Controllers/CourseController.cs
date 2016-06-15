@@ -19,22 +19,22 @@ namespace ATS.BackOffice.Controllers
 
         CourseViewModel[] mCourses = new CourseViewModel[] 
         { 
-            new CourseViewModel { ID = Guid.NewGuid(), Name = "Math" }, 
-            new CourseViewModel { ID = Guid.NewGuid(), Name = "English" },
-            new CourseViewModel { ID = Guid.NewGuid(), Name = "Japanese" },
+            new CourseViewModel { CourseID = Guid.NewGuid(), Name = "Math" }, 
+            new CourseViewModel { CourseID = Guid.NewGuid(), Name = "English" },
+            new CourseViewModel { CourseID = Guid.NewGuid(), Name = "Japanese" },
         };
 
         // GET: api/Course
         public IQueryable<CourseViewModel> Get()
-        {
-            //var courses = from t in db.Courses
-            //                select new CourseViewModel()
-            //                {
-            //                    ID = t.ID,
-            //                };
+        {            
+            var courses = from t in db.Courses
+                          select new CourseViewModel()
+                          {
+                              CourseID = t.CourseID,
+                          };
 
-            //return courses;
-            return mCourses.AsQueryable();
+            return courses;
+            //return mCourses.AsQueryable();
         }
 
         // GET: api/Course/5
@@ -44,8 +44,8 @@ namespace ATS.BackOffice.Controllers
             var course = await db.Courses.Include(c => c.Schedules).Select(t =>
                 new CourseViewModel()
                 {
-                    ID = t.CourseID,
-                }).SingleOrDefaultAsync(t => t.ID == id);
+                    CourseID = t.CourseID,
+                }).SingleOrDefaultAsync(t => t.CourseID == id);
             if (course == null)
             {
                 return NotFound();
@@ -78,7 +78,7 @@ namespace ATS.BackOffice.Controllers
 
             var _course = new Course
             {
-                CourseID = course.ID
+                CourseID = course.CourseID
             };
 
             db.Courses.Add(_course);
@@ -111,7 +111,7 @@ namespace ATS.BackOffice.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != course.ID)
+            if (id != course.CourseID)
             {
                 return BadRequest();
             }
