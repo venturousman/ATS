@@ -3,10 +3,10 @@
 /// </summary>
 define(['require'], function (require) {
     // get route service instance
-    var dashboardModule = angular.module('dashboard');
+    var shellModule = angular.module('shell');
 
     // must be a provider since it will be injected into module.config()    
-    dashboardModule.provider('routeResolver', function () {
+    shellModule.provider('routeResolver', function () {
         /// <summary>
         // get method to return this instance
         /// </summary>
@@ -28,7 +28,8 @@ define(['require'], function (require) {
                 // as all the views aren't added on the build script, so we shoud add the baseUrl 
                 // to make sure requirejs know what exactly path
                 routeDef.url = url;
-                routeDef.templateUrl = appConfigs.baseUrl + '/' + viewPath + pageName + '.html';
+                //routeDef.templateUrl = appConfigs.baseUrl + '/' + viewPath + pageName + '.html';
+                routeDef.templateUrl = viewPath + pageName + '.html';
                 routeDef.controller = controllerName;
 
                 routeDef.resolve = {

@@ -28,7 +28,8 @@ define(['require'], function (require) {
                 // as all the views aren't added on the build script, so we shoud add the baseUrl 
                 // to make sure requirejs know what exactly path
                 routeDef.url = url;
-                routeDef.templateUrl = appConfigs.baseUrl + '/' + viewPath + pageName + '.html';
+                //routeDef.templateUrl = appConfigs.baseUrl + '/' + viewPath + pageName + '.html';
+                routeDef.templateUrl = viewPath + pageName + '.html';
                 routeDef.controller = controllerName;
 
                 routeDef.resolve = {

@@ -1,7 +1,7 @@
 define([], function () {
-    var dwModule = angular.module('shell');
+    var shellModule = angular.module('shell');
     var baseUrl = 'https://ax7rtwdw1aos.cloudax.dynamics.com/data/';
-    dwModule.constant('restServiceUrl', {
+    shellModule.constant('restServiceUrl', {
         'getAppointments': baseUrl + 'AppointmentTables',
         'getAppointmentDetails': baseUrl + "AppointmentTables?$filter=AppointmentNo eq ",
         'getAppointmentByCustomerID': baseUrl + "AppointmentTables?$filter=CustomerID eq ",

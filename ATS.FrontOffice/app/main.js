@@ -7,8 +7,7 @@ var appConfigs = {
     //idleTime: 48 * 30 * 60 * 1000,
     version: 1,
     baseUrl: 'app',
-    //modules: ['common', 'localization', 'shell', 'attendanceTrackingSystem']
-    modules: ['common', 'shell','attendanceTrackingSystem']
+    modules: ['common', 'localization', 'shell', 'attendanceTrackingSystem']
 }
 
 // require js configuration
@@ -21,7 +20,7 @@ require.config({
         'angular-ui-router': '../scripts/angular-ui-router-0.2.15',
         //'angular-route': '../scripts/angular-route',
         'angular-cookies': '../scripts/angular-cookies.min',
-        //'bootstrap': '../js/LibraryFiles/bootstrap-3.3.6/js/bootstrap',
+        'bootstrap': '../scripts/bootstrap',
         'underscore': '../scripts/underscore-1.8.3',
         'underscore-string': '../scripts/underscore.string-2.3.3',
         'underscore-string-format': '../scripts/underscore.string.format',
@@ -40,6 +39,9 @@ require.config({
         //'angular-route': ['angular']
         'angular-cookies': {
             deps: ['angular']
+        },
+        'bootstrap': {
+            deps: ['jquery']
         },
         'underscore': {
             exports: '_'
@@ -60,7 +62,7 @@ require([
     //'jquery-ui',
     //'jquery.ui.touch-punch.min',
     //'ipicture',
-    //'bootstrap',
+    'bootstrap',
     ////'clockface',
     //'date',
     //'master',

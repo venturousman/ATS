@@ -7,7 +7,7 @@ define([], function () {
         }
     }
     // inject courses controller to attendanceTrackingSystem module
-    angular.module('attendanceTrackingSystem').controller('courses', ['$scope', coursesController]);
+    angular.module('attendanceTrackingSystem').register.controller('courses', ['$scope', coursesController]);
 
     return coursesController;
 });
