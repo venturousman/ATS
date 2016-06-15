@@ -225,6 +225,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CourseMgtController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MeController.cs" />
@@ -342,6 +343,11 @@
     <Content Include="Scripts\knockout.validation.min.js.map" />
     <Content Include="Scripts\jquery-2.2.3.min.map" />
     <Content Include="Views\Upload\Index.cshtml" />
+    <Content Include="Views\CourseMgt\Create.cshtml" />
+    <Content Include="Views\CourseMgt\Delete.cshtml" />
+    <Content Include="Views\CourseMgt\Details.cshtml" />
+    <Content Include="Views\CourseMgt\Edit.cshtml" />
+    <Content Include="Views\CourseMgt\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
