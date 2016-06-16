@@ -22,6 +22,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATS.Model", "ATS.Model\ATS.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATS.Service", "ATS.Service\ATS.Service.csproj", "{1B705F65-606B-4D9A-B6F0-54F656F0F741}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Temporary files", "Temporary files", "{AC28B6C5-73AE-4F54-B8B1-AE3808D5CA69}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\Desktop\ATS\Gloabl - Employee data.xlsx = ..\..\..\Desktop\ATS\Gloabl - Employee data.xlsx
+		..\..\..\Desktop\ATS\Training basic data.xlsx = ..\..\..\Desktop\ATS\Training basic data.xlsx
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,5 +57,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AC28B6C5-73AE-4F54-B8B1-AE3808D5CA69} = {70A3A669-9F66-4096-A4AC-2EA15F738934}
 	EndGlobalSection
 EndGlobal
