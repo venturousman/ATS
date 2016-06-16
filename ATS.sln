@@ -23,6 +23,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATS.Service", "ATS.Service\ATS.Service.csproj", "{1B705F65-606B-4D9A-B6F0-54F656F0F741}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Temporary files", "Temporary files", "{444EEEC7-7D2D-4326-901F-6AA8FD5F896F}"
+	ProjectSection(SolutionItems) = preProject
+		Documents\Temporary files\Gloabl - Employee data.xlsx = Documents\Temporary files\Gloabl - Employee data.xlsx
+		Documents\Temporary files\Training basic data.xlsx = Documents\Temporary files\Training basic data.xlsx
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
