@@ -1,8 +1,8 @@
-﻿@using (Html.BeginForm("UploadEmployeeGlobal", "Upload", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+﻿@using (Html.BeginForm("UploadGlobalEmployee", "Upload", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <div class="custom-file-upload row">
         <div class="col-md-8">
-            <label for="file">Upload employee global: </label>
+            <label for="file">Upload global employees: </label>
             <input type="file" id="dataFile" name="upload" accept=".xlsx" />
         </div>
         <div class="col-md-4">
@@ -11,11 +11,28 @@
     </div>
 }
 
-@using (Html.BeginForm("UploadTrainingDataGlobal", "Upload", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("UploadGlobalTraining", "Upload", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <div class="custom-file-upload row">
         <div class="col-md-8">
-            <label for="file">Upload training global: </label>
+            <label for="file">Upload global training: </label>
+            <input type="file" id="dataFileDataTraining" name="upload" accept=".xlsx" />
+        </div>
+        <div class="col-md-4">
+            <input type="submit" value="Update" class="btn btn-primary" />
+        </div>
+    </div>
+    <div>
+
+    </div>
+
+}
+
+@using (Html.BeginForm("UploadLocalEmployee", "Upload", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="custom-file-upload row">
+        <div class="col-md-8">
+            <label for="file">Upload local employees: </label>
             <input type="file" id="dataFileDataTraining" name="upload" accept=".xlsx" />
         </div>
         <div class="col-md-4">
@@ -29,7 +46,7 @@
 }
 
 <script>
-    
+
 </script>
 <style>
     .custom-file-upload {
@@ -37,13 +54,14 @@
         width: auto;
         font-size: 16px;
         margin-top: 30px;
-        //border: 1px solid #ccc;
-        label;
+        border: 1px solid #ccc;
+    }
+        /*label:
 
     {
         display: block;
         margin-bottom: 5px;
     }
 
-    }
+    }*/
 </style>

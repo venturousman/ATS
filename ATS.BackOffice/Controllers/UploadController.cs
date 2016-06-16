@@ -19,7 +19,7 @@ namespace ATS.BackOffice.Controllers
             return View();
         }
 
-        public ActionResult UploadEmployeeGlobal(HttpPostedFileBase upload)
+        public ActionResult UploadGlobalEmployee(HttpPostedFileBase upload)
         {
             try
             {
@@ -58,7 +58,7 @@ namespace ATS.BackOffice.Controllers
                         {
                             DataTable dataTable = new DataTable();
                             dataTable = employeeGlobal.Tables[0];
-                            UpdateEmployeeGlobal(dataTable);
+                            UpdateGlobalEmployee(dataTable);
                         }
                     }
                     else
@@ -75,7 +75,7 @@ namespace ATS.BackOffice.Controllers
             }
         }
 
-        private void UpdateEmployeeGlobal(DataTable dataTable)
+        private void UpdateGlobalEmployee(DataTable dataTable)
         {
             try
             {
@@ -114,11 +114,11 @@ namespace ATS.BackOffice.Controllers
 
                 throw;
             }
-            
+
 
         }
 
-        public ActionResult UploadTrainingDataGlobal(HttpPostedFileBase upload)
+        public ActionResult UploadGlobalTraining(HttpPostedFileBase upload)
         {
             try
             {
@@ -155,7 +155,7 @@ namespace ATS.BackOffice.Controllers
                         {
                             DataTable dataTable = new DataTable();
                             dataTable = dataTrainingGlobal.Tables[0];
-                            UpdateTrainingDataGlobal(dataTable);
+                            UpdateGlobalTraining(dataTable);
                         }
                     }
                     else
@@ -172,7 +172,7 @@ namespace ATS.BackOffice.Controllers
             }
         }
 
-        private void UpdateTrainingDataGlobal(DataTable dataTable)
+        private void UpdateGlobalTraining(DataTable dataTable)
         {
             try
             {
@@ -217,7 +217,81 @@ namespace ATS.BackOffice.Controllers
             }
             catch (Exception ex)
             {
+                throw;
+            }
+        }
 
+        public ActionResult UploadLocalEmployee(HttpPostedFileBase upload)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    if (upload != null && upload.ContentLength > 0)
+                    {
+                        // ExcelDataReader works with the binary Excel file, so it needs a FileStream
+                        // to get started. This is how we avoid dependencies on ACE or Interop:
+                        Stream stream = upload.InputStream;
+                        // We return the interface, so that
+                        IExcelDataReader reader = null;
+
+                        if (upload.FileName.EndsWith(".xls"))
+                        {
+                            reader = ExcelReaderFactory.CreateBinaryReader(stream);
+                        }
+                        else if (upload.FileName.EndsWith(".xlsx"))
+                        {
+                            reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+                        }
+                        else
+                        {
+                            //will check in javascript
+                            ModelState.AddModelError("File", "This file format is not supported");
+                        }
+
+                        reader.IsFirstRowAsColumnNames = true;
+
+                        DataSet dataTrainingGlobal = reader.AsDataSet();
+                        reader.Close();
+
+                        if (dataTrainingGlobal.Tables.Count > 0)
+                        {
+                            DataTable dataTable = new DataTable();
+                            dataTable = dataTrainingGlobal.Tables[0];
+                            UpdateLocalEmployee(dataTable);
+                        }
+                    }
+                    else
+                    {
+                        // ModelState.AddModelError("File", "Please Upload Your file");
+                    }
+                }
+                return View("Index");
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private void UpdateLocalEmployee(DataTable dataTable)
+        {
+            try
+            {
+                using (var context = new ATSEntities())
+                {
+                    context.Database.Connection.Open();
+
+                    var param = new SqlParameter("@DataTable", SqlDbType.Structured);
+                    param.Value = dataTable;
+                    param.TypeName = "TrainingBasicData";
+
+                    context.Database.ExecuteSqlCommand("EXEC USP_IMPORT_LOCALEMPLOYEE @DataTable", param);
+                }
+            }
+            catch (Exception ex)
+            {
                 throw;
             }
         }
