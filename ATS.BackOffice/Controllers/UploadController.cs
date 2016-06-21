@@ -8,11 +8,13 @@ using System.Web.Mvc;
 using Excel;
 using ATS.Data;
 using System.Data.SqlClient;
+using ATS.Model;
 
 namespace ATS.BackOffice.Controllers
 {
     public class UploadController : Controller
     {
+        private ATSEntities db = new ATSEntities();
         // GET: Upload
         public ActionResult Index()
         {
@@ -105,7 +107,6 @@ namespace ATS.BackOffice.Controllers
                     var param = new SqlParameter("@DataTable", SqlDbType.Structured);
                     param.Value = dataTable;
                     param.TypeName = "GlobalEmployee";
-
                     context.Database.ExecuteSqlCommand("EXEC USP_IMPORT_GLOBALEMPLOYEE @DataTable", param);
                 }
             }
@@ -266,11 +267,11 @@ namespace ATS.BackOffice.Controllers
                         // ModelState.AddModelError("File", "Please Upload Your file");
                     }
                 }
-                return View("Index");
+                var listEmployee = GetAllEmployee();
+                return View("Index",listEmployee);
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -285,7 +286,7 @@ namespace ATS.BackOffice.Controllers
 
                     var param = new SqlParameter("@DataTable", SqlDbType.Structured);
                     param.Value = dataTable;
-                    param.TypeName = "TrainingBasicData";
+                    param.TypeName = "LocalEmployee";
 
                     context.Database.ExecuteSqlCommand("EXEC USP_IMPORT_LOCALEMPLOYEE @DataTable", param);
                 }
@@ -294,6 +295,22 @@ namespace ATS.BackOffice.Controllers
             {
                 throw;
             }
+        }
+
+        public IQueryable<Employee> GetAllEmployee()
+        {
+            //var courses = from t in db.Employees where t.IsActive==true
+            //              select new EmployeeViewModel()
+            //              {
+            //                  EmployeeID=t.EmployeeID
+            //              };
+
+
+            var courses = db.Employees.Select(p => p);
+           
+
+            return courses;
+            //return mCourses.AsQueryable();
         }
     }
 }
