@@ -98,6 +98,12 @@
     <Content Include="app\modules\shell\views\home.html" />
     <Content Include="app\modules\shell\views\setting.html" />
     <Content Include="app\_courses.html" />
+    <Content Include="Content\main.css" />
+    <Content Include="img\bg_footer.jpg" />
+    <Content Include="img\bg_footer_mobile.jpg" />
+    <Content Include="img\bg_header.jpg" />
+    <Content Include="img\bg_header_mobile.png" />
+    <Content Include="img\logo.png" />
     <Content Include="Scripts\angular-ui-router-0.2.15.js" />
     <Content Include="Scripts\jquery-2.2.3.js" />
     <Content Include="Scripts\jquery-2.2.3.min.js" />
