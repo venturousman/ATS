@@ -70,6 +70,7 @@
     <Content Include="app\modules\attendanceTrackingSystem\loader.js" />
     <Content Include="app\modules\attendanceTrackingSystem\resources\resources-locale_default.js" />
     <Content Include="app\modules\attendanceTrackingSystem\resources\resources-locale_en-US.js" />
+    <Content Include="app\modules\attendanceTrackingSystem\services\courses.js" />
     <Content Include="app\modules\attendanceTrackingSystem\views\courses.html" />
     <Content Include="app\modules\attendanceTrackingSystem\views\home.html" />
     <Content Include="app\modules\attendanceTrackingSystem\views\schedules.html" />

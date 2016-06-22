@@ -17,24 +17,20 @@ namespace ATS.BackOffice.Controllers
     {
         private ATSEntities db = new ATSEntities();
 
-        CourseViewModel[] mCourses = new CourseViewModel[] 
-        { 
-            new CourseViewModel { CourseID = Guid.NewGuid(), Name = "Math" }, 
-            new CourseViewModel { CourseID = Guid.NewGuid(), Name = "English" },
-            new CourseViewModel { CourseID = Guid.NewGuid(), Name = "Japanese" },
-        };
-
         // GET: api/Course
         public IQueryable<CourseViewModel> Get()
-        {            
+        {
             var courses = from t in db.Courses
+                          //where t.IsActive == true
                           select new CourseViewModel()
                           {
                               CourseID = t.CourseID,
+                              Name = t.Name,
+                              Note = t.Note,
+                              IsActive = t.IsActive
                           };
 
             return courses;
-            //return mCourses.AsQueryable();
         }
 
         // GET: api/Course/5

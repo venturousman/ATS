@@ -1,15 +1,16 @@
 define([], function () {
     var shellModule = angular.module('shell');
-    var baseUrl = 'https://ax7rtwdw1aos.cloudax.dynamics.com/data/';
+    var baseUrl = 'http://localhost:54543/';
     shellModule.constant('restServiceUrl', {
-        'getAppointments': baseUrl + 'AppointmentTables',
-        'getAppointmentDetails': baseUrl + "AppointmentTables?$filter=AppointmentNo eq ",
-        'getAppointmentByCustomerID': baseUrl + "AppointmentTables?$filter=CustomerID eq ",
-        'getCustomerDetails': '',
-        'getOpenAppointmentCount': '',
-        'getJobCardDetails': baseUrl + "SMSJobCardDetails?$filter=smsAppointmentNo eq ",
-        'getProductDetails': baseUrl + "ReleasedDistinctProducts?$select=ProductNumber,ProductSearchName,ProductGroupId",
-        'getConfirmedServiceList': baseUrl + "ConfirmedServiceListTables?$select=ItemId,ItemName&$filter=AppointmentNo eq ",
-        'getProductCategories':''
+        'getCourses': baseUrl + 'api/Course',
+        //'getAppointments': baseUrl + 'AppointmentTables',
+        //'getAppointmentDetails': baseUrl + "AppointmentTables?$filter=AppointmentNo eq ",
+        //'getAppointmentByCustomerID': baseUrl + "AppointmentTables?$filter=CustomerID eq ",
+        //'getCustomerDetails': '',
+        //'getOpenAppointmentCount': '',
+        //'getJobCardDetails': baseUrl + "SMSJobCardDetails?$filter=smsAppointmentNo eq ",
+        //'getProductDetails': baseUrl + "ReleasedDistinctProducts?$select=ProductNumber,ProductSearchName,ProductGroupId",
+        //'getConfirmedServiceList': baseUrl + "ConfirmedServiceListTables?$select=ItemId,ItemName&$filter=AppointmentNo eq ",
+        //'getProductCategories':''
     });
 });
