@@ -1,4 +1,7 @@
-﻿@using (Html.BeginForm("UploadGlobalEmployee", "Upload", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+﻿@model IList<ATS.Data.Employee>
+
+
+@using (Html.BeginForm("UploadGlobalEmployee", "Upload", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <div class="custom-file-upload row">
         <div class="col-md-8">
@@ -40,10 +43,33 @@
         </div>
     </div>
     <div>
+        @if (Model != null && Model.Count > 0)
+        {
+            var grid = new WebGrid();
+            WebGridColumn[] gridColumns;
+            grid = new WebGrid(Model, canPage: true, rowsPerPage: 8);
+
+            gridColumns = new WebGridColumn[2];
+            gridColumns[0] = grid.Column("EmployeeID", "Employee ID", format: @<text> @item.EmployeeID </text>, style: "grp");
+            gridColumns[1] = grid.Column("NTID", "NTID", format: @<text> @item.NTID</text>, style: "name");
+
+            @grid.GetHtml(
+        tableStyle: "GridView",
+        htmlAttributes: new { width = "99%", id = "gdComplaintList" },
+        mode: WebGridPagerModes.All,
+        columns: grid.Columns(gridColumns))
+        }
+
+
 
     </div>
 
+
+
 }
+
+
+
 
 <script>
 
@@ -56,12 +82,4 @@
         margin-top: 30px;
         border: 1px solid #ccc;
     }
-        /*label:
-
-    {
-        display: block;
-        margin-bottom: 5px;
-    }
-
-    }*/
 </style>
