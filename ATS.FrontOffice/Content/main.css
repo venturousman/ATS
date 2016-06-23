@@ -1,12 +1,46 @@
-﻿.ats-footer {
+﻿/*html, body {
+    height: 100%;
+}
+
+.wrapper {
+    min-height: 100%;
+}*/
+
+.ats-header {
+    width: 100%;
+    background: url(../img/bg_header.jpg) repeat-x center top;
+    overflow: hidden;
+}
+
+.ats-header-section {
+    padding-top: 20px;
+}
+
+.ats-logo {
+    width: 150px;
+}
+
+    .ats-logo img {
+        width: 100%;
+    }
+
+.ats-footer {
     clear: both;
     width: 100%;
     background: url(../img/bg_footer.jpg) repeat-x center bottom;
     overflow: hidden;
-    padding-bottom: 32px;
+    /*padding-bottom: 32px;*/
+    position: absolute;
+    bottom: 0;
+    height: 32px;
+    /*background-color: #f5f5f5;*/
 }
 
 @media only screen and (max-width: 640px) {
+    .ats-header {
+        background: url(../img/bg_header_mobile.png) repeat-x left top;
+    }
+
     .ats-footer {
         background: url(../img/bg_footer_mobile.jpg) repeat-x left bottom;
     }
