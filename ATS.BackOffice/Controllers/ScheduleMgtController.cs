@@ -11,18 +11,18 @@ using ATS.Data;
 
 namespace ATS.BackOffice.Controllers
 {
-    public class SchedulesController : Controller
+    public class ScheduleMgtController : Controller
     {
         private ATSEntities db = new ATSEntities();
 
-        // GET: Schedules
+        // GET: ScheduleMgt
         public async Task<ActionResult> Index()
         {
             var schedules = db.Schedules.Include(s => s.Course).Include(s => s.Teacher);
             return View(await schedules.ToListAsync());
         }
 
-        // GET: Schedules/Details/5
+        // GET: ScheduleMgt/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -37,7 +37,7 @@ namespace ATS.BackOffice.Controllers
             return View(schedule);
         }
 
-        // GET: Schedules/Create
+        // GET: ScheduleMgt/Create
         public ActionResult Create()
         {
             ViewBag.CourseID = new SelectList(db.Courses, "CourseID", "Name");
@@ -45,7 +45,7 @@ namespace ATS.BackOffice.Controllers
             return View();
         }
 
-        // POST: Schedules/Create
+        // POST: ScheduleMgt/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -64,7 +64,7 @@ namespace ATS.BackOffice.Controllers
             return View(schedule);
         }
 
-        // GET: Schedules/Edit/5
+        // GET: ScheduleMgt/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -81,7 +81,7 @@ namespace ATS.BackOffice.Controllers
             return View(schedule);
         }
 
-        // POST: Schedules/Edit/5
+        // POST: ScheduleMgt/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -101,7 +101,7 @@ namespace ATS.BackOffice.Controllers
             return View(schedule);
         }
 
-        // GET: Schedules/Delete/5
+        // GET: ScheduleMgt/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -116,7 +116,7 @@ namespace ATS.BackOffice.Controllers
             return View(schedule);
         }
 
-        // POST: Schedules/Delete/5
+        // POST: ScheduleMgt/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
