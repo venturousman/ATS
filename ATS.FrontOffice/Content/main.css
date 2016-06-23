@@ -1,0 +1,13 @@
+﻿.ats-footer {
+    clear: both;
+    width: 100%;
+    background: url(../img/bg_footer.jpg) repeat-x center bottom;
+    overflow: hidden;
+    padding-bottom: 32px;
+}
+
+@media only screen and (max-width: 640px) {
+    .ats-footer {
+        background: url(../img/bg_footer_mobile.jpg) repeat-x left bottom;
+    }
+}

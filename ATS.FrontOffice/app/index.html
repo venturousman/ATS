@@ -3,12 +3,24 @@
 <head>
     <meta charset="utf-8">
     <title>Attendance Tracking System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no" />
     <!-- data-main attribute tells require.js to load scripts/main.js after require.js loads. -->
     <!--<script src="../Scripts/angular.js"></script>-->
     <link href="../Content/bootstrap.css" rel="stylesheet" />
+    <link href="../Content/main.css" rel="stylesheet" />
 </head>
-<body ng-controller="shell">    
+<body ng-controller="shell">
+    <header class="ats-header">
+        <div class="container">
+            <section class="">
+                <div class="ats-logo">
+                    <img src="../img/logo.png" alt="logo Bosch" />
+                </div>
+            </section>
+        </div>
+    </header>
     <div ui-view></div>
+    <footer class="ats-footer"></footer>
     <script type="text/javascript">
         var require = {
             urlArgs: "v=" + Date.now()

@@ -9,6 +9,7 @@ using Excel;
 using ATS.Data;
 using System.Data.SqlClient;
 using ATS.Model;
+using Microsoft.Ajax.Utilities;
 
 namespace ATS.BackOffice.Controllers
 {
@@ -267,7 +268,9 @@ namespace ATS.BackOffice.Controllers
                         // ModelState.AddModelError("File", "Please Upload Your file");
                     }
                 }
-                var listEmployee = GetAllEmployee();
+                var listEmployee = GetAllEmployee().ToList();
+               // ViewBag.Customers = "customers";
+                //var json = JSON.parse(listEmployee);
                 return View("Index",listEmployee);
             }
             catch (Exception)
@@ -304,11 +307,7 @@ namespace ATS.BackOffice.Controllers
             //              {
             //                  EmployeeID=t.EmployeeID
             //              };
-
-
             var courses = db.Employees.Select(p => p);
-           
-
             return courses;
             //return mCourses.AsQueryable();
         }
