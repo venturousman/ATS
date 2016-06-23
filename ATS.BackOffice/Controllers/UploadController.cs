@@ -311,5 +311,99 @@ namespace ATS.BackOffice.Controllers
             return courses;
             //return mCourses.AsQueryable();
         }
+
+        public ActionResult UploadScanTime(HttpPostedFileBase upload)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    if (upload != null && upload.ContentLength > 0)
+                    {
+                        // exceldatareader works with the binary excel file, so it needs a filestream
+                        // to get started. this is how we avoid dependencies on ace or interop:
+                        string _File = Path.Combine(Server.MapPath("~/TimeData"), upload.FileName);
+
+                        bool blColsCreated = false;
+                        DataTable Dt = new DataTable("Temp_RBVH_BadgeReaderData");
+                        //string[] allLines = File.ReadAllLines(@"D:\RBVN\BadgeReader\Msg20130722.log");
+                        string[] allLines = System.IO.File.ReadAllLines(_File);
+                        {
+                            for (int i = 0; i < allLines.Length; i++)
+                            {
+                                string line = allLines[i];
+                                string[] items = allLines[i].Split(new char[] { ';' });
+
+                                if (items.Length == 18)
+                                {
+                                    for (int j = 0; !blColsCreated && j < items.Length; j++)
+                                    {
+                                        Dt.Columns.Add("col" + Convert.ToString((j + 1)));
+                                    }
+                                    blColsCreated = true;
+                                    DataRow Dr = Dt.NewRow();
+                                    for (int k = 0; k < items.Length; k++)
+                                    {
+                                        Dr[k] = items[k];
+                                    }
+                                    Dt.Rows.Add(Dr);
+                                }
+                            }//System.Configuration.ConfigurationManager.ConnectionStrings["ATSEntities"].ToString(), 
+                        }
+                        BulkInsertData(Dt, "Temp_BadgeReaderData");
+
+                        UpdateData();
+                    }
+                }
+                return View("Index");
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private static void BulkInsertData(DataTable DT, string TableName)
+        {
+            // Establishing connection                
+            SqlConnection cnn = new SqlConnection("Data Source=DESKTOP-37GQ4EC\\SQLEXPRESS;Initial Catalog=TranningManager;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework");
+
+            // Getting source data
+            //SqlCommand cmd = new SqlCommand("SELECT * FROM Temp_RBVH_BadgeReaderData",cnn); 
+            cnn.Open();
+            //SqlDataReader rdr = cmd.ExecuteReader(); 
+
+            // Initializing an SqlBulkCopy object
+            SqlBulkCopy sbc = new SqlBulkCopy(cnn);
+
+            // Copying data to destination
+            sbc.DestinationTableName = TableName;// "Temp_RBVH_BadgeReaderData"; 
+            sbc.WriteToServer(DT);
+
+            // Closing connection and the others
+            sbc.Close();
+            //rdr.Close(); 
+            cnn.Close();
+        }
+
+        private void UpdateData()
+        {
+            try
+            {
+                using (var context = new ATSEntities())
+                {
+                    context.Database.Connection.Open();
+
+                    var param = new SqlParameter("@SwipeDate", SqlDbType.VarChar);
+                    param.Value = "20160608";
+
+                    context.Database.ExecuteSqlCommand("EXEC USP_IMPORT_TIME @SwipeDate", param);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }

@@ -55,5 +55,19 @@ namespace ATS.Data
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("USP_IMPORT_TRAININGBASICDATA");
         }
+    
+        public virtual int USP_IMPORT_LOCALEMPLOYEE()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("USP_IMPORT_LOCALEMPLOYEE");
+        }
+    
+        public virtual int USP_IMPORT_TIME(string swipeDate)
+        {
+            var swipeDateParameter = swipeDate != null ?
+                new ObjectParameter("SwipeDate", swipeDate) :
+                new ObjectParameter("SwipeDate", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("USP_IMPORT_TIME", swipeDateParameter);
+        }
     }
 }

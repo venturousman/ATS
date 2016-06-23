@@ -63,12 +63,20 @@
 
 
     </div>
-
-
-
 }
 
-
+@using (Html.BeginForm("UploadScanTime", "Upload", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="custom-file-upload row">
+        <div class="col-md-8">
+            <label for="file">Upload Scantime: </label>
+            <input type="file" id="dataFile" name="upload" accept=".log" />
+        </div>
+        <div class="col-md-4">
+            <input type="submit" value="Update" class="btn btn-primary" />
+        </div>
+    </div>
+}
 
 
 <script>

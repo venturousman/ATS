@@ -76,6 +76,7 @@
           <Property Name="FirstName" Type="nvarchar" MaxLength="500" />
           <Property Name="LastName" Type="nvarchar" MaxLength="500" />
           <Property Name="OrganizationID" Type="int" />
+          <Property Name="EmailAddress" Type="nvarchar" MaxLength="2000" />
           <Property Name="Initiator" Type="nchar" MaxLength="20" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="ModifiedBy" Type="nchar" MaxLength="10" />
@@ -198,6 +199,28 @@
           <Property Name="ModifiedDate" Type="datetime" />
           <Property Name="EmlpoyeeID" Type="nchar" MaxLength="20" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'TranningManager.dbo.Temp_BadgeReaderData' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Temp_BadgeReaderData">
+          <Property Name="col1" Type="varchar" MaxLength="100" />
+          <Property Name="col2" Type="varchar" MaxLength="100" />
+          <Property Name="col3" Type="varchar" MaxLength="100" />
+          <Property Name="col4" Type="varchar" MaxLength="100" />
+          <Property Name="col5" Type="varchar" MaxLength="100" />
+          <Property Name="col6" Type="varchar" MaxLength="100" />
+          <Property Name="col7" Type="varchar" MaxLength="100" />
+          <Property Name="col8" Type="varchar" MaxLength="100" />
+          <Property Name="col9" Type="varchar" MaxLength="100" />
+          <Property Name="col10" Type="varchar" MaxLength="100" />
+          <Property Name="col11" Type="varchar" MaxLength="100" />
+          <Property Name="col12" Type="varchar" MaxLength="100" />
+          <Property Name="col13" Type="varchar" MaxLength="100" />
+          <Property Name="col14" Type="varchar" MaxLength="100" />
+          <Property Name="col15" Type="varchar" MaxLength="100" />
+          <Property Name="col16" Type="varchar" MaxLength="100" />
+          <Property Name="col17" Type="varchar" MaxLength="100" />
+          <Property Name="col18" Type="varchar" MaxLength="100" />
+        </EntityType>-->
         <EntityType Name="TerminalMaster">
           <Key>
             <PropertyRef Name="TerminalID" />
@@ -473,6 +496,10 @@
           </ReferentialConstraint>
         </Association>
         <Function Name="USP_IMPORT_GLOBALEMPLOYEE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="USP_IMPORT_LOCALEMPLOYEE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="USP_IMPORT_TIME" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SwipeDate" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="USP_IMPORT_TRAININGBASICDATA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="ATSDataModelStoreContainer">
           <EntitySet Name="ApplicationMenu" EntityType="Self.ApplicationMenu" Schema="dbo" store:Type="Tables" />
@@ -671,6 +698,10 @@
           </AssociationSet>
           <FunctionImport Name="USP_IMPORT_GLOBALEMPLOYEE" />
           <FunctionImport Name="USP_IMPORT_TRAININGBASICDATA" />
+          <FunctionImport Name="USP_IMPORT_LOCALEMPLOYEE" />
+          <FunctionImport Name="USP_IMPORT_TIME">
+            <Parameter Name="SwipeDate" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="ApplicationMenu">
           <Key>
@@ -759,6 +790,7 @@
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Employees" Relationship="ATSDataModel.FK_CardEmployeeMaster_EmployeeGlobalMaster" FromRole="EmployeeGlobal" ToRole="Employee" />
           <NavigationProperty Name="Organization" Relationship="ATSDataModel.FK_EmployeeGlobal_Organization" FromRole="EmployeeGlobal" ToRole="Organization" />
+          <Property Name="EmailAddress" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Leave">
           <Key>
@@ -1250,6 +1282,7 @@
           <EntitySetMapping Name="EmployeeGlobals">
             <EntityTypeMapping TypeName="ATSDataModel.EmployeeGlobal">
               <MappingFragment StoreEntitySet="EmployeeGlobal">
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
@@ -1437,6 +1470,8 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="USP_IMPORT_GLOBALEMPLOYEE" FunctionName="ATSDataModel.Store.USP_IMPORT_GLOBALEMPLOYEE" />
           <FunctionImportMapping FunctionImportName="USP_IMPORT_TRAININGBASICDATA" FunctionName="ATSDataModel.Store.USP_IMPORT_TRAININGBASICDATA" />
+          <FunctionImportMapping FunctionImportName="USP_IMPORT_LOCALEMPLOYEE" FunctionName="ATSDataModel.Store.USP_IMPORT_LOCALEMPLOYEE" />
+          <FunctionImportMapping FunctionImportName="USP_IMPORT_TIME" FunctionName="ATSDataModel.Store.USP_IMPORT_TIME" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
