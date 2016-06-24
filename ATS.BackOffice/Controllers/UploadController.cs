@@ -24,6 +24,7 @@ namespace ATS.BackOffice.Controllers
 
         public ActionResult UploadGlobalEmployee(HttpPostedFileBase upload)
         {
+            string result = "";
             try
             {
                 if (ModelState.IsValid)
@@ -61,7 +62,7 @@ namespace ATS.BackOffice.Controllers
                         {
                             DataTable dataTable = new DataTable();
                             dataTable = employeeGlobal.Tables[0];
-                            UpdateGlobalEmployee(dataTable);
+                            result = UpdateGlobalEmployee(dataTable);
                         }
                     }
                     else
@@ -69,16 +70,22 @@ namespace ATS.BackOffice.Controllers
                         // ModelState.AddModelError("File", "Please Upload Your file");
                     }
                 }
+                var a = GetEmployeeGlobals().ToList();
+                ViewBag.Message = result;
+                if (result=="Success!")
+                {
+                    ViewBag.listEmployeeGlobals = GetEmployeeGlobals().ToList();
+                }
                 return View("Index");
             }
             catch (Exception ex)
             {
-
-                throw;
+                ViewBag.Message = result;
+                return View("Index");
             }
         }
 
-        private void UpdateGlobalEmployee(DataTable dataTable)
+        private string UpdateGlobalEmployee(DataTable dataTable)
         {
             try
             {
@@ -109,12 +116,12 @@ namespace ATS.BackOffice.Controllers
                     param.Value = dataTable;
                     param.TypeName = "GlobalEmployee";
                     context.Database.ExecuteSqlCommand("EXEC USP_IMPORT_GLOBALEMPLOYEE @DataTable", param);
+                    return "Success!";
                 }
             }
             catch (Exception ex)
             {
-
-                throw;
+                return "Please choose global employee file excel";
             }
 
 
@@ -124,6 +131,7 @@ namespace ATS.BackOffice.Controllers
         {
             try
             {
+                string result = "";
                 if (ModelState.IsValid)
                 {
                     if (upload != null && upload.ContentLength > 0)
@@ -157,7 +165,7 @@ namespace ATS.BackOffice.Controllers
                         {
                             DataTable dataTable = new DataTable();
                             dataTable = dataTrainingGlobal.Tables[0];
-                            UpdateGlobalTraining(dataTable);
+                            result= UpdateGlobalTraining(dataTable);
                         }
                     }
                     else
@@ -165,6 +173,7 @@ namespace ATS.BackOffice.Controllers
                         // ModelState.AddModelError("File", "Please Upload Your file");
                     }
                 }
+                ViewBag.Message = result;
                 return View("Index");
             }
             catch (Exception)
@@ -174,8 +183,9 @@ namespace ATS.BackOffice.Controllers
             }
         }
 
-        private void UpdateGlobalTraining(DataTable dataTable)
+        private string UpdateGlobalTraining(DataTable dataTable)
         {
+            string result = "";
             try
             {
                 dataTable.Columns[0].ColumnName = "ScheduledOfferingID";
@@ -213,20 +223,22 @@ namespace ATS.BackOffice.Controllers
                     var param = new SqlParameter("@DataTable", SqlDbType.Structured);
                     param.Value = dataTable;
                     param.TypeName = "TrainingBasicData";
-
                     context.Database.ExecuteSqlCommand("EXEC USP_IMPORT_TRAININGBASICDATA @DataTable", param);
+                    result = "Success!";
                 }
             }
             catch (Exception ex)
             {
-                throw;
+                result = "Could please choose excel file of tranning!";
             }
+            return  result;
         }
 
         public ActionResult UploadLocalEmployee(HttpPostedFileBase upload)
         {
             try
             {
+                string result = "";
                 if (ModelState.IsValid)
                 {
                     if (upload != null && upload.ContentLength > 0)
@@ -260,7 +272,7 @@ namespace ATS.BackOffice.Controllers
                         {
                             DataTable dataTable = new DataTable();
                             dataTable = dataTrainingGlobal.Tables[0];
-                            UpdateLocalEmployee(dataTable);
+                           result= UpdateLocalEmployee(dataTable);
                         }
                     }
                     else
@@ -268,10 +280,12 @@ namespace ATS.BackOffice.Controllers
                         // ModelState.AddModelError("File", "Please Upload Your file");
                     }
                 }
-                var listEmployee = GetAllEmployee().ToList();
-               // ViewBag.Customers = "customers";
-                //var json = JSON.parse(listEmployee);
-                return View("Index",listEmployee);
+                if (result == "Success!")
+                {
+                    ViewBag.listEmployee = GetEmployees().ToList();
+                }
+                ViewBag.Message = result;
+                return View("Index");
             }
             catch (Exception)
             {
@@ -279,8 +293,9 @@ namespace ATS.BackOffice.Controllers
             }
         }
 
-        private void UpdateLocalEmployee(DataTable dataTable)
+        private string UpdateLocalEmployee(DataTable dataTable)
         {
+            string result="";
             try
             {
                 using (var context = new ATSEntities())
@@ -292,24 +307,27 @@ namespace ATS.BackOffice.Controllers
                     param.TypeName = "LocalEmployee";
 
                     context.Database.ExecuteSqlCommand("EXEC USP_IMPORT_LOCALEMPLOYEE @DataTable", param);
+                    result = "Success!";
                 }
             }
             catch (Exception ex)
             {
-                throw;
+                result = "Could please choose excel file of employee local!";
             }
+            return result;
         }
 
-        public IQueryable<Employee> GetAllEmployee()
+        public IQueryable<Employee> GetEmployees()
         {
-            //var courses = from t in db.Employees where t.IsActive==true
-            //              select new EmployeeViewModel()
-            //              {
-            //                  EmployeeID=t.EmployeeID
-            //              };
-            var courses = db.Employees.Select(p => p);
-            return courses;
-            //return mCourses.AsQueryable();
+            //var employees = db.Employees.Where(p=>p.IsActive==1).Select(p => p);
+            var employees = db.Employees.Where(p => p.IsActive == true).Select(p => p);
+            return employees;
+        }
+
+        public IQueryable<EmployeeGlobal> GetEmployeeGlobals()
+        {
+            var employeeGlobals = db.EmployeeGlobals.Select(p => p);
+            return employeeGlobals;
         }
     }
 }
