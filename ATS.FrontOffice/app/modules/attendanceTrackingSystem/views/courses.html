@@ -12,23 +12,32 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
+            <!--<tr>
                 <td>Japanese</td>
                 <td>this course is conducted by Tuan Vinh (HRL1)</td>
                 <td>true</td>
-                <td><a href='#'><span class='glyphicon glyphicon-edit'></span></a></td>
+                <td><a href='#'><span class='glyphicon glyphicon-list'></span></a></td>
             </tr>
             <tr>
                 <td>Japanese2</td>
                 <td>this course is conducted by Tuan Vinh (HRL1)</td>
                 <td>false</td>
-                <td><a href='#'><span class='glyphicon glyphicon-edit'></span></a></td>
+                <td><a href='#'><span class='glyphicon glyphicon-list'></span></a></td>
             </tr>
             <tr>
                 <td>Japanese3</td>
                 <td>this course is conducted by Tuan Vinh (HRL1)</td>
                 <td>true</td>
-                <td><a href='#'><span class='glyphicon glyphicon-edit'></span></a></td>
+                <td><a href='#'><span class='glyphicon glyphicon-list'></span></a></td>
+            </tr>-->
+            <tr ng-repeat="item in data.courseList" ng-click="selectCourse($event,item)">
+                <td><p class="" ng-bind="item.name"></p></td>
+                <td><p class="" ng-bind="item.note"></p></td>
+                <!--<td><p class="" ng-bind="item.isActive"></p></td>-->
+                <!--<div ng-class=" ... ? 'class-1' : ( ... ? 'class-2' : 'class-3')"></div>-->
+                <td><span style="display:block;" class="text-center" ng-class=" item.isActive ? 'glyphicon glyphicon-ok text-success' : 'glyphicon glyphicon-remove text-danger'"></span></td>
+                <td><a href='#'><span class='glyphicon glyphicon-list'></span></a></td>
+                <!--<td><a href='#' ng-click="selectCourse($event,item)"><span class='glyphicon glyphicon-list'></span></a></td>-->
             </tr>
         </tbody>
     </table>
