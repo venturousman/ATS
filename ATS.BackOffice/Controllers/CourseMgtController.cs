@@ -13,8 +13,11 @@ namespace ATS.BackOffice.Controllers
 {
     public class CourseMgtController : Controller
     {
-        private ATSEntities db = new ATSEntities();
-
+        private ATSEntities db = null;
+        public CourseMgtController(ATSEntities entites)
+        {
+            db = entites;
+        }
         // GET: CourseMgt
         public async Task<ActionResult> Index()
         {

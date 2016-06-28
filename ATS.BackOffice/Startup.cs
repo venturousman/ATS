@@ -4,7 +4,7 @@ using System.Linq;
 using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartup(typeof(ATS.BackOffice.Startup))]
+//[assembly: OwinStartup(typeof(ATS.BackOffice.Startup))]
 
 namespace ATS.BackOffice
 {

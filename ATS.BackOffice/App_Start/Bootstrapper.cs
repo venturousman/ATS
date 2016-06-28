@@ -2,6 +2,8 @@
 using Autofac.Integration.Mvc;
 using System.Reflection;
 using System.Web.Mvc;
+using System.Data.Entity;
+using ATS.Data;
 
 namespace ATS.BackOffice.App_Start
 {
@@ -14,23 +16,23 @@ namespace ATS.BackOffice.App_Start
 
         private static void SetAutofacContainer()
         {
-            var builder = new ContainerBuilder();
-            builder.RegisterControllers(Assembly.GetExecutingAssembly());
-            //builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerRequest();
-            //builder.RegisterType<DbFactory>().As<IDbFactory>().InstancePerRequest();
+            var builder = new ContainerBuilder();            
+            builder.RegisterControllers(typeof(MvcApplication).Assembly).PropertiesAutowired();
+            builder.RegisterModelBinders(typeof(MvcApplication).Assembly).PropertiesAutowired();
 
-            // Repositories
-            //builder.RegisterAssemblyTypes(typeof(GadgetRepository).Assembly)
-            //    .Where(t => t.Name.EndsWith("Repository"))
-            //    .AsImplementedInterfaces().InstancePerRequest();
-
-            // Services
-            //builder.RegisterAssemblyTypes(typeof(GadgetService).Assembly)
-            //   .Where(t => t.Name.EndsWith("Service"))
-            //   .AsImplementedInterfaces().InstancePerRequest();
+            builder.RegisterModule(new ATSModule());
 
             IContainer container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+        }
+    }
+    public class ATSModule : Autofac.Module
+    {
+
+        protected override void Load(ContainerBuilder builder)
+        {
+
+            builder.Register(c => new ATSEntities()).InstancePerLifetimeScope();            
         }
     }
 
