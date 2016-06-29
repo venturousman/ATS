@@ -15,7 +15,7 @@ namespace ATS.BackOffice.Controllers
 {
     public class UploadController : Controller
     {
-        private ATSEntities db;
+        private ATSEntities db=null;
         // GET: Upload
         public ActionResult Index()
         {
@@ -71,7 +71,7 @@ namespace ATS.BackOffice.Controllers
                 }
                 var a = GetEmployeeGlobals().ToList();
                 ViewBag.Message = result;
-                if (result == "Success!")
+                if (result == "success")
                 {
                     ViewBag.listEmployeeGlobals = GetEmployeeGlobals().ToList();
                 }
@@ -79,7 +79,7 @@ namespace ATS.BackOffice.Controllers
             }
             catch (Exception ex)
             {
-                ViewBag.Message = result;
+                ViewBag.listEmployeeGlobals = result;
                 return View("Index");
             }
         }
@@ -108,12 +108,12 @@ namespace ATS.BackOffice.Controllers
                 dataTable.Columns[25].ColumnName = "NativeDeeplinkUser";
                 dataTable.Columns[25].ColumnName = "GamificationUserID";
                 dataTable.Columns[25].ColumnName = "Regular";
-
+                db = new ATSEntities();
                 var param = new SqlParameter("@DataTable", SqlDbType.Structured);
                 param.Value = dataTable;
                 param.TypeName = "GlobalEmployee";
                 db.Database.ExecuteSqlCommand("EXEC USP_IMPORT_GLOBALEMPLOYEE @DataTable", param);
-                return "Success!";
+                return "success";
             }
             catch (Exception ex)
             {
@@ -197,7 +197,7 @@ namespace ATS.BackOffice.Controllers
                 dataTable.Columns[16].ColumnName = "FirstName";
                 dataTable.Columns[17].ColumnName = "MiddleName";
                 dataTable.Columns[19].ColumnName = "Legal Entity";
-
+                db = new ATSEntities();
                 var param = new SqlParameter("@DataTable", SqlDbType.Structured);
                 param.Value = dataTable;
                 param.TypeName = "TrainingBasicData";
@@ -276,6 +276,7 @@ namespace ATS.BackOffice.Controllers
 
             try
             {
+                db = new ATSEntities();
                 var param = new SqlParameter("@DataTable", SqlDbType.Structured);
                 param.Value = dataTable;
                 param.TypeName = "LocalEmployee";
@@ -381,6 +382,7 @@ namespace ATS.BackOffice.Controllers
         {
             try
             {
+                db = new ATSEntities();
                 var param = new SqlParameter("@SwipeDate", SqlDbType.VarChar);
                 param.Value = "20160608";
 

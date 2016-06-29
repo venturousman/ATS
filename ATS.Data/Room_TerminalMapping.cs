@@ -12,14 +12,17 @@ namespace ATS.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Transaction
+    public partial class Room_TerminalMapping
     {
-        public System.Guid TransactionID { get; set; }
-        public string EmployeeID { get; set; }
-        public string CardID { get; set; }
-        public System.DateTime Time { get; set; }
         public System.Guid RoomID { get; set; }
-        public bool InOut { get; set; }
+        public System.Guid TerminalID { get; set; }
+        public string Initiator { get; set; }
         public System.DateTime CreatedDate { get; set; }
+        public string ModifiedBy { get; set; }
+        public Nullable<System.DateTime> ModifiedDate { get; set; }
+        public bool IsActive { get; set; }
+    
+        public virtual Room Room { get; set; }
+        public virtual TerminalMaster TerminalMaster { get; set; }
     }
 }

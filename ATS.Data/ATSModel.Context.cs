@@ -34,10 +34,12 @@ namespace ATS.Data
         public virtual DbSet<EmployeeGlobal> EmployeeGlobals { get; set; }
         public virtual DbSet<Leave> Leaves { get; set; }
         public virtual DbSet<Organization> Organizations { get; set; }
+        public virtual DbSet<OrganizationType> OrganizationTypes { get; set; }
         public virtual DbSet<Reason> Reasons { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<RoleMapping> RoleMappings { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }
+        public virtual DbSet<Room_TerminalMapping> Room_TerminalMapping { get; set; }
         public virtual DbSet<Schedule> Schedules { get; set; }
         public virtual DbSet<Segment> Segments { get; set; }
         public virtual DbSet<Teacher> Teachers { get; set; }
@@ -49,6 +51,20 @@ namespace ATS.Data
         public virtual int USP_IMPORT_GLOBALEMPLOYEE()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("USP_IMPORT_GLOBALEMPLOYEE");
+        }
+    
+        public virtual int USP_IMPORT_LOCALEMPLOYEE()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("USP_IMPORT_LOCALEMPLOYEE");
+        }
+    
+        public virtual int USP_IMPORT_TIME(string swipeDate)
+        {
+            var swipeDateParameter = swipeDate != null ?
+                new ObjectParameter("SwipeDate", swipeDate) :
+                new ObjectParameter("SwipeDate", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("USP_IMPORT_TIME", swipeDateParameter);
         }
     
         public virtual int USP_IMPORT_TRAININGBASICDATA()

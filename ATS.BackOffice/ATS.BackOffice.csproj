@@ -1425,6 +1425,10 @@
       <Project>{e1dad1fb-8893-4461-9420-c793572bf868}</Project>
       <Name>ATS.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ATS.Service\ATS.Service.csproj">
+      <Project>{1b705f65-606b-4d9a-b6f0-54f656f0f741}</Project>
+      <Name>ATS.Service</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

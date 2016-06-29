@@ -14,7 +14,6 @@ namespace ATS.Data
     
     public partial class ApplicationMenu
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ApplicationMenu()
         {
             this.RoleMappings = new HashSet<RoleMapping>();
@@ -24,11 +23,10 @@ namespace ATS.Data
         public string Name { get; set; }
         public string ParentCode { get; set; }
         public string Controller { get; set; }
-        public int Initiator { get; set; }
+        public string Initiator { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public bool IsActive { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RoleMapping> RoleMappings { get; set; }
     }
 }

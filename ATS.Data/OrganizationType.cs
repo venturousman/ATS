@@ -12,14 +12,17 @@ namespace ATS.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Transaction
+    public partial class OrganizationType
     {
-        public System.Guid TransactionID { get; set; }
-        public string EmployeeID { get; set; }
-        public string CardID { get; set; }
-        public System.DateTime Time { get; set; }
-        public System.Guid RoomID { get; set; }
-        public bool InOut { get; set; }
-        public System.DateTime CreatedDate { get; set; }
+        public OrganizationType()
+        {
+            this.Organizations = new HashSet<Organization>();
+        }
+    
+        public int TypeID { get; set; }
+        public string TypeName { get; set; }
+        public bool IsActive { get; set; }
+    
+        public virtual ICollection<Organization> Organizations { get; set; }
     }
 }

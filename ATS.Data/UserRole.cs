@@ -20,7 +20,7 @@ namespace ATS.Data
         public System.DateTime CreatedDate { get; set; }
         public string ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
-        public bool IsAcive { get; set; }
+        public bool IsActive { get; set; }
     
         public virtual Employee Employee { get; set; }
         public virtual Role Role { get; set; }
