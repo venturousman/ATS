@@ -15,7 +15,7 @@ namespace ATS.BackOffice.Controllers
 {
     public class UploadController : Controller
     {
-        private ATSEntities db = new ATSEntities();
+        private ATSEntities db;
         // GET: Upload
         public ActionResult Index()
         {
@@ -37,7 +37,6 @@ namespace ATS.BackOffice.Controllers
 
                         // We return the interface, so that
                         IExcelDataReader reader = null;
-
 
                         if (upload.FileName.EndsWith(".xls"))
                         {
@@ -72,7 +71,7 @@ namespace ATS.BackOffice.Controllers
                 }
                 var a = GetEmployeeGlobals().ToList();
                 ViewBag.Message = result;
-                if (result=="Success!")
+                if (result == "Success!")
                 {
                     ViewBag.listEmployeeGlobals = GetEmployeeGlobals().ToList();
                 }
@@ -110,21 +109,16 @@ namespace ATS.BackOffice.Controllers
                 dataTable.Columns[25].ColumnName = "GamificationUserID";
                 dataTable.Columns[25].ColumnName = "Regular";
 
-                using (var context = new ATSEntities())
-                {
-                    var param = new SqlParameter("@DataTable", SqlDbType.Structured);
-                    param.Value = dataTable;
-                    param.TypeName = "GlobalEmployee";
-                    context.Database.ExecuteSqlCommand("EXEC USP_IMPORT_GLOBALEMPLOYEE @DataTable", param);
-                    return "Success!";
-                }
+                var param = new SqlParameter("@DataTable", SqlDbType.Structured);
+                param.Value = dataTable;
+                param.TypeName = "GlobalEmployee";
+                db.Database.ExecuteSqlCommand("EXEC USP_IMPORT_GLOBALEMPLOYEE @DataTable", param);
+                return "Success!";
             }
             catch (Exception ex)
             {
                 return "Please choose global employee file excel";
             }
-
-
         }
 
         public ActionResult UploadGlobalTraining(HttpPostedFileBase upload)
@@ -165,7 +159,7 @@ namespace ATS.BackOffice.Controllers
                         {
                             DataTable dataTable = new DataTable();
                             dataTable = dataTrainingGlobal.Tables[0];
-                            result= UpdateGlobalTraining(dataTable);
+                            result = UpdateGlobalTraining(dataTable);
                         }
                     }
                     else
@@ -178,7 +172,6 @@ namespace ATS.BackOffice.Controllers
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -205,33 +198,17 @@ namespace ATS.BackOffice.Controllers
                 dataTable.Columns[17].ColumnName = "MiddleName";
                 dataTable.Columns[19].ColumnName = "Legal Entity";
 
-                //for (int i = 0; i < dataTable.Rows.Count; i++)
-                //{
-                //    for (int j = 0; j < dataTable.Rows[i].ItemArray.Count(); j++)
-                //    {
-                //        if (dataTable.Rows[i].ItemArray[j].GetType() == typeof(DBNull))
-                //        {
-                //            dataTable.Rows[i].ItemArray[j] = "N/A";
-                //        }
-                //    }
-                //}
-
-                using (var context = new ATSEntities())
-                {
-                    context.Database.Connection.Open();
-
-                    var param = new SqlParameter("@DataTable", SqlDbType.Structured);
-                    param.Value = dataTable;
-                    param.TypeName = "TrainingBasicData";
-                    context.Database.ExecuteSqlCommand("EXEC USP_IMPORT_TRAININGBASICDATA @DataTable", param);
-                    result = "Success!";
-                }
+                var param = new SqlParameter("@DataTable", SqlDbType.Structured);
+                param.Value = dataTable;
+                param.TypeName = "TrainingBasicData";
+                db.Database.ExecuteSqlCommand("EXEC USP_IMPORT_TRAININGBASICDATA @DataTable", param);
+                result = "Success!";
             }
             catch (Exception ex)
             {
                 result = "Could please choose excel file of tranning!";
             }
-            return  result;
+            return result;
         }
 
         public ActionResult UploadLocalEmployee(HttpPostedFileBase upload)
@@ -272,7 +249,7 @@ namespace ATS.BackOffice.Controllers
                         {
                             DataTable dataTable = new DataTable();
                             dataTable = dataTrainingGlobal.Tables[0];
-                           result= UpdateLocalEmployee(dataTable);
+                            result = UpdateLocalEmployee(dataTable);
                         }
                     }
                     else
@@ -295,20 +272,16 @@ namespace ATS.BackOffice.Controllers
 
         private string UpdateLocalEmployee(DataTable dataTable)
         {
-            string result="";
+            string result = "";
+
             try
             {
-                using (var context = new ATSEntities())
-                {
-                    context.Database.Connection.Open();
+                var param = new SqlParameter("@DataTable", SqlDbType.Structured);
+                param.Value = dataTable;
+                param.TypeName = "LocalEmployee";
 
-                    var param = new SqlParameter("@DataTable", SqlDbType.Structured);
-                    param.Value = dataTable;
-                    param.TypeName = "LocalEmployee";
-
-                    context.Database.ExecuteSqlCommand("EXEC USP_IMPORT_LOCALEMPLOYEE @DataTable", param);
-                    result = "Success!";
-                }
+                db.Database.ExecuteSqlCommand("EXEC USP_IMPORT_LOCALEMPLOYEE @DataTable", param);
+                result = "Success!";
             }
             catch (Exception ex)
             {
@@ -328,6 +301,95 @@ namespace ATS.BackOffice.Controllers
         {
             var employeeGlobals = db.EmployeeGlobals.Select(p => p);
             return employeeGlobals;
+        }
+
+        public ActionResult UploadScanTime(HttpPostedFileBase upload)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    if (upload != null && upload.ContentLength > 0)
+                    {
+                        // exceldatareader works with the binary excel file, so it needs a filestream
+                        // to get started. this is how we avoid dependencies on ace or interop:
+                        string _File = Path.Combine(Server.MapPath("~/TimeData"), upload.FileName);
+
+                        bool blColsCreated = false;
+                        DataTable Dt = new DataTable("Temp_RBVH_BadgeReaderData");
+                        //string[] allLines = File.ReadAllLines(@"D:\RBVN\BadgeReader\Msg20130722.log");
+                        string[] allLines = System.IO.File.ReadAllLines(_File);
+                        {
+                            for (int i = 0; i < allLines.Length; i++)
+                            {
+                                string line = allLines[i];
+                                string[] items = allLines[i].Split(new char[] { ';' });
+
+                                if (items.Length == 18)
+                                {
+                                    for (int j = 0; !blColsCreated && j < items.Length; j++)
+                                    {
+                                        Dt.Columns.Add("col" + Convert.ToString((j + 1)));
+                                    }
+                                    blColsCreated = true;
+                                    DataRow Dr = Dt.NewRow();
+                                    for (int k = 0; k < items.Length; k++)
+                                    {
+                                        Dr[k] = items[k];
+                                    }
+                                    Dt.Rows.Add(Dr);
+                                }
+                            }//System.Configuration.ConfigurationManager.ConnectionStrings["ATSEntities"].ToString(), 
+                        }
+                        BulkInsertData(Dt, "Temp_BadgeReaderData");
+
+                        UpdateData();
+                    }
+                }
+                return View("Index");
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private static void BulkInsertData(DataTable DT, string TableName)
+        {
+            // Establishing connection                
+            SqlConnection cnn = new SqlConnection("Data Source=DESKTOP-37GQ4EC\\SQLEXPRESS;Initial Catalog=TranningManager;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework");
+
+            // Getting source data
+            //SqlCommand cmd = new SqlCommand("SELECT * FROM Temp_RBVH_BadgeReaderData",cnn); 
+            cnn.Open();
+            //SqlDataReader rdr = cmd.ExecuteReader(); 
+
+            // Initializing an SqlBulkCopy object
+            SqlBulkCopy sbc = new SqlBulkCopy(cnn);
+
+            // Copying data to destination
+            sbc.DestinationTableName = TableName;// "Temp_RBVH_BadgeReaderData"; 
+            sbc.WriteToServer(DT);
+
+            // Closing connection and the others
+            sbc.Close();
+            //rdr.Close(); 
+            cnn.Close();
+        }
+
+        private void UpdateData()
+        {
+            try
+            {
+                var param = new SqlParameter("@SwipeDate", SqlDbType.VarChar);
+                param.Value = "20160608";
+
+                db.Database.ExecuteSqlCommand("EXEC USP_IMPORT_TIME @SwipeDate", param);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
     }
 }
