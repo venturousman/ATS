@@ -10,8 +10,9 @@ namespace ATS.BackOffice
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+            /*bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                 "~/Scripts/jquery-{version}.js"));
+            */
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                 "~/Scripts/jquery.unobtrusive*",
@@ -34,13 +35,85 @@ namespace ATS.BackOffice
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                 "~/Scripts/modernizr-*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+            /*bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                 "~/Scripts/bootstrap.js",
                 "~/Scripts/respond.js"));
+            */
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
-                 "~/Content/bootstrap.css",
-                 "~/Content/Site.css"));
+            //bundles.Add(new StyleBundle("~/Content/css").Include(
+            //     "~/Content/bootstrap.css",
+            //     "~/Content/Site.css"));
+
+            #region AdminLTE main scripts and plugins
+            bundles.Add(new ScriptBundle("~/bundles/AdminLTEScripts").Include(
+                    "~/Themes/AdminLTE-2.3.3/plugins/jQuery/jQuery-2.2.0.min.js",
+                    "~/Themes/AdminLTE-2.3.3/plugins/jQueryUI/jQuery-ui.min.js",
+                    //Bootstrap 3.3.6
+                    "~/Themes/AdminLTE-2.3.3/bootstrap/js/bootstrap.min.js",
+                    //plugins
+                    //Morris.js charts
+                    "~/Themes/AdminLTE-2.3.3/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js",
+                    //Sparkline
+                    "~/Themes/AdminLTE-2.3.3/plugins/sparkline/jquery.sparkline.min.js",
+                    //jvectormap
+                    "~/Themes/AdminLTE-2.3.3/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js",
+                    "~/Themes/AdminLTE-2.3.3/plugins/jvectormap/jquery-jvectormap-world-mill-en.js",
+                    //jQuery Knob Chart
+                    "~/Themes/AdminLTE-2.3.3/plugins/knob/jquery.knob.js",
+                    //daterangepicker
+                    "~/Themes/AdminLTE-2.3.3/plugins/daterangepicker/moment.min.js",
+                    "~/Themes/AdminLTE-2.3.3/plugins/daterangepicker/daterangepicker.js",
+                    //datepicker
+                    "~/Themes/AdminLTE-2.3.3/plugins/datepicker/bootstrap-datepicker.js",
+                    //Bootstrap WYSIHTML5
+                    "~/Themes/AdminLTE-2.3.3/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js",
+                    //Slimscroll
+                    "~/Themes/AdminLTE-2.3.3/plugins/slimScroll/jquery.slimscroll.min.js",
+                    //FastClick
+                    "~/Themes/AdminLTE-2.3.3/plugins/fastclick/fastclick.js",
+                    //AdminLTE App
+                    "~/Themes/AdminLTE-2.3.3/dist/js/app.min.js"));
+            #endregion
+
+            #region AdminLTE CSS
+            //bundles.Add(new StyleBundle("~/bundles/AdminLTEStyles").Include(
+            //        //Bootstrap 3.3.6
+            //        "~/Themes/AdminLTE-2.3.3/bootstrap/css/bootstrap.min.css",
+            //        "~/Content/bootstrap.css",
+            //        "~/Content/Site.css"));
+            //var lessBundle = new StyleBundle("~/bundles/AdminLTEStyles").Include(
+            //    "~/Themes/AdminLTE-2.3.3/build/less/AdminLTE.less",
+            //    "~/Themes/AdminLTE-2.3.3/build/less/skins/_all-skins.less",
+            //    "~/Themes/AdminLTE-2.3.3/build/less/test.less");
+
+
+            var lessBundle = new StyleBundle("~/bundles/AdminLTEStyles").Include(
+                "~/Themes/AdminLTE-2.3.3/bootstrap/css/bootstrap.min.css",
+                "~/Themes/AdminLTE-2.3.3/build/less/AdminLTE.less",
+                "~/Themes/AdminLTE-2.3.3/build/less/skins/_all-skins.less",
+                //iCheck
+                "~/Themes/AdminLTE-2.3.3/plugins/iCheck/flat/blue.css",
+                //Morris chart
+                "~/Themes/AdminLTE-2.3.3/plugins/morris/morris.css",                
+                //Date Picker
+                "~/Themes/AdminLTE-2.3.3/plugins/datepicker/datepicker3.css",
+                //jvectormap
+                "~/Themes/AdminLTE-2.3.3/plugins/jvectormap/jquery-jvectormap-1.2.2.css",
+                //Daterange picker
+                "~/Themes/AdminLTE-2.3.3/plugins/daterangepicker/daterangepicker-bs3.css",
+                //bootstrap wysihtml5
+                "~/Themes/AdminLTE-2.3.3/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css",
+                //our style
+                "~/Themes/ATS.less"
+                );
+            
+            lessBundle.Transforms.Add(new CssMinify());
+            bundles.Add(lessBundle);
+            #endregion
+
+            //BundleTable.EnableOptimizations = true;
+
+
         }
     }
 }

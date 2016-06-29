@@ -13,6 +13,7 @@ namespace ATS.BackOffice.Controllers
 {
     public class CourseMgtController : Controller
     {
+        private const string INDEX_PAGE = "Index";
         private ATSEntities db = null;
         public CourseMgtController(ATSEntities entites)
         {
@@ -50,14 +51,14 @@ namespace ATS.BackOffice.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "CourseID,Name,Note,IsActive")] Course course)
+        public async Task<ActionResult> Create(Course course)
         {
             if (ModelState.IsValid)
             {
                 course.CourseID = Guid.NewGuid();
                 db.Courses.Add(course);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction(INDEX_PAGE);
             }
 
             return View(course);
@@ -83,13 +84,13 @@ namespace ATS.BackOffice.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "CourseID,Name,Note,IsActive")] Course course)
+        public async Task<ActionResult> Edit(Course course)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(course).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction(INDEX_PAGE);
             }
             return View(course);
         }
@@ -117,7 +118,7 @@ namespace ATS.BackOffice.Controllers
             Course course = await db.Courses.FindAsync(id);
             db.Courses.Remove(course);
             await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction(INDEX_PAGE);
         }
 
         protected override void Dispose(bool disposing)
