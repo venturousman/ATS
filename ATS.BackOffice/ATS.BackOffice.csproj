@@ -1413,9 +1413,9 @@
     <Content Include="Themes\AdminLTE-2.3.3\plugins\input-mask\phone-codes\phone-be.json" />
     <Content Include="Themes\AdminLTE-2.3.3\plugins\input-mask\phone-codes\phone-codes.json" />
     <Content Include="Themes\AdminLTE-2.3.3\README.md" />
-    <Content Include="TimeData\Msg20160608.log" />
     <Content Include="Themes\ATS.less" />
     <Content Include="Views\Employee\Index.cshtml" />
+    <Content Include="TimeData\Msg20160608.log" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
