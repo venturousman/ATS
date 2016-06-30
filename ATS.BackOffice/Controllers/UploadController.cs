@@ -38,11 +38,10 @@ namespace ATS.BackOffice.Controllers
                 {
                     if (upload != null && upload.ContentLength > 0)
                     {
-                        // We return the interface, so that
                         IExcelDataReader reader = getExcelData(upload);
                         if (reader == null)
                         {
-                            result = "notSupportFile";
+                            result = notSupportFile;
                         }
                         reader.IsFirstRowAsColumnNames = true;
                         DataSet employeeGlobal = reader.AsDataSet();
@@ -119,10 +118,8 @@ namespace ATS.BackOffice.Controllers
                         else
                         {
                             reader.IsFirstRowAsColumnNames = true;
-
                             DataSet dataTrainingGlobal = reader.AsDataSet();
                             reader.Close();
-
                             if (dataTrainingGlobal.Tables.Count > 0)
                             {
                                 DataTable dataTable = new DataTable();
@@ -199,8 +196,9 @@ namespace ATS.BackOffice.Controllers
                         else
                         {
                             reader.IsFirstRowAsColumnNames = true;
-                            reader.Close();
+                          
                             DataSet dataTrainingGlobal = reader.AsDataSet();
+                            reader.Close();
                             if (dataTrainingGlobal.Tables.Count > 0)
                             {
                                 DataTable dataTable = new DataTable();

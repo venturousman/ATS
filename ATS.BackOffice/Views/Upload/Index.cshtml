@@ -7,7 +7,7 @@
     <div class="custom-file-upload row">
         <div class="col-md-8">
             <label for="file">Upload global employees: </label>
-            <input type="file" id="dataFile" name="upload" accept=".xlsx" />
+            <input type="file" id="dataFileGlobalEmployee" name="upload" accept=".xlsx" />
         </div>
         <div class="col-md-4">
             <input type="submit" value="Update" class="btn btn-primary" />
@@ -37,7 +37,7 @@
     <div class="custom-file-upload row">
         <div class="col-md-8">
             <label for="file">Upload global training: </label>
-            <input type="file" id="dataFileDataTraining" name="upload" accept=".xlsx" />
+            <input type="file" id="fileDataTraining" name="upload" accept=".xlsx" />
         </div>
         <div class="col-md-4">
             <input type="submit" value="Update" class="btn btn-primary" />
@@ -67,10 +67,10 @@
     <div class="custom-file-upload row">
         <div class="col-md-8">
             <label for="file">Upload local employees: </label>
-            <input type="file" id="dataFileDataTraining" name="upload" accept=".xlsx" />
+            <input type="file" id="dataLocalEmployee" name="upload" accept=".xlsx" />
         </div>
         <div class="col-md-4">
-            <input type="submit" value="Update" class="btn btn-primary" />
+            <input type="submit" value="Update" class="btn btn-primary" id="btnUploadLocalEmployees"/>
         </div>
     </div>
     <div>
@@ -85,7 +85,7 @@
             else
             {
                 <div class="alert alert-danger " id="divUploadLocalEmployeeUnSuccess">
-                    <strong>Upload Unsuccess!</strong> Upload employee local unsucces.
+                    <strong>Upload Unsuccess!</strong> Upload employee local unsucces - ViewBag.MessageUploadLocalEmpoyee.
                 </div>
             }
         }

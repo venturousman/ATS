@@ -76,6 +76,7 @@
           <Property Name="FirstName" Type="nvarchar" MaxLength="500" />
           <Property Name="LastName" Type="nvarchar" MaxLength="500" />
           <Property Name="OrganizationID" Type="int" />
+          <Property Name="EmailAddress" Type="nvarchar" MaxLength="2000" />
           <Property Name="Initiator" Type="nchar" MaxLength="20" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="ModifiedBy" Type="nchar" MaxLength="10" />
@@ -473,6 +474,7 @@
           </ReferentialConstraint>
         </Association>
         <Function Name="USP_IMPORT_GLOBALEMPLOYEE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="USP_IMPORT_LOCALEMPLOYEE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="USP_IMPORT_TRAININGBASICDATA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="ATSDataModelStoreContainer">
           <EntitySet Name="ApplicationMenu" EntityType="Self.ApplicationMenu" Schema="dbo" store:Type="Tables" />
@@ -671,6 +673,7 @@
           </AssociationSet>
           <FunctionImport Name="USP_IMPORT_GLOBALEMPLOYEE" />
           <FunctionImport Name="USP_IMPORT_TRAININGBASICDATA" />
+          <FunctionImport Name="USP_IMPORT_LOCALEMPLOYEE" />
         </EntityContainer>
         <EntityType Name="ApplicationMenu">
           <Key>
@@ -759,6 +762,7 @@
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Employees" Relationship="ATSDataModel.FK_CardEmployeeMaster_EmployeeGlobalMaster" FromRole="EmployeeGlobal" ToRole="Employee" />
           <NavigationProperty Name="Organization" Relationship="ATSDataModel.FK_EmployeeGlobal_Organization" FromRole="EmployeeGlobal" ToRole="Organization" />
+          <Property Name="EmailAddress" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Leave">
           <Key>
@@ -1250,6 +1254,7 @@
           <EntitySetMapping Name="EmployeeGlobals">
             <EntityTypeMapping TypeName="ATSDataModel.EmployeeGlobal">
               <MappingFragment StoreEntitySet="EmployeeGlobal">
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
@@ -1437,6 +1442,7 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="USP_IMPORT_GLOBALEMPLOYEE" FunctionName="ATSDataModel.Store.USP_IMPORT_GLOBALEMPLOYEE" />
           <FunctionImportMapping FunctionImportName="USP_IMPORT_TRAININGBASICDATA" FunctionName="ATSDataModel.Store.USP_IMPORT_TRAININGBASICDATA" />
+          <FunctionImportMapping FunctionImportName="USP_IMPORT_LOCALEMPLOYEE" FunctionName="ATSDataModel.Store.USP_IMPORT_LOCALEMPLOYEE" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
