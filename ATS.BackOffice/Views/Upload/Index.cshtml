@@ -7,23 +7,29 @@
     <div class="custom-file-upload row">
         <div class="col-md-8">
             <label for="file">Upload global employees: </label>
-            <input type="file" id="dataFile" name="upload" accept=".xlsx" />
+            <input type="file" id="dataFileGlobalEmployee" name="upload" accept=".xlsx" />
         </div>
         <div class="col-md-4">
             <input type="submit" value="Update" class="btn btn-primary" />
         </div>
     </div>
     <div>
-        <div class="alert alert-success " id="divUploadGlobalEmployeeSuccess">
-            <strong>Upload Success!</strong> Upload employee global succes.
-        </div>
-
-        <div class="alert alert-danger " id="divUploadGlobalEmployeeUnSuccess">
-            <strong>Upload Unsuccess!</strong> Upload employee global unsucces.
-        </div>
+        @if (ViewBag.MessageUploadGlobalEmployee != null)
+        {
+            if (ViewBag.MessageUploadGlobalEmployee == "success")
+            {
+                <div class="alert alert-success " id="divUploadGlobalEmployeeSuccess">
+                    <strong>Upload Success!</strong> Upload employee global succes.
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-danger " id="divUploadGlobalEmployeeUnSuccess">
+                    <strong>Upload Unsuccess!</strong> Upload employee global unsucces.
+                </div>
+            }
+        }
     </div>
-
-
 }
 
 @using (Html.BeginForm("UploadGlobalTraining", "Upload", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -31,21 +37,29 @@
     <div class="custom-file-upload row">
         <div class="col-md-8">
             <label for="file">Upload global training: </label>
-            <input type="file" id="dataFileDataTraining" name="upload" accept=".xlsx" />
+            <input type="file" id="fileDataTraining" name="upload" accept=".xlsx" />
         </div>
         <div class="col-md-4">
             <input type="submit" value="Update" class="btn btn-primary" />
         </div>
     </div>
     <div>
-        <div class="alert alert-success " id="divUploadTrainingBasicSuccess">
-            <strong>Upload Success!</strong> Upload training basic succes.
-        </div>
-        <div class="alert alert-danger " id="divUploadTrainingBasicUnSuccess">
-            <strong>Upload Unsuccess!</strong> Upload training basic unsucces.
-        </div>
+        @if (ViewBag.MessageGlobalTraining != null)
+        {
+            if (ViewBag.MessageGlobalTraining == "success")
+            {
+                <div class="alert alert-success " id="divUploadTrainingBasicSuccess">
+                    <strong>Upload Success!</strong> Upload training basic succes.
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-danger " id="divUploadTrainingBasicUnSuccess">
+                    <strong>Upload Unsuccess!</strong> Upload training basic unsucces.
+                </div>
+            }
+        }
     </div>
-
 }
 
 @using (Html.BeginForm("UploadLocalEmployee", "Upload", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -53,79 +67,30 @@
     <div class="custom-file-upload row">
         <div class="col-md-8">
             <label for="file">Upload local employees: </label>
-            <input type="file" id="dataFileDataTraining" name="upload" accept=".xlsx" />
+            <input type="file" id="dataLocalEmployee" name="upload" accept=".xlsx" />
         </div>
         <div class="col-md-4">
-            <input type="submit" value="Update" class="btn btn-primary" />
+            <input type="submit" value="Update" class="btn btn-primary" id="btnUploadLocalEmployees"/>
         </div>
     </div>
-
     <div>
-        <div class="alert alert-success " id="divUploadLocalEmployeeSuccess">
-            <strong>Upload Success!</strong> Upload employee local succes.
-        </div>
-        <div class="alert alert-danger " id="divUploadLocalEmployeeUnSuccess">
-            <strong>Upload Unsuccess!</strong> Upload employee local unsucces.
-        </div>
+        @if (ViewBag.MessageUploadLocalEmpoyee != null)
+        {
+            if (ViewBag.MessageUploadLocalEmpoyee == "success")
+            {
+                <div class="alert alert-success " id="divUploadLocalEmployeeSuccess">
+                    <strong>Upload Success!</strong> Upload employee local succes.
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-danger " id="divUploadLocalEmployeeUnSuccess">
+                    <strong>Upload Unsuccess!</strong> Upload employee local unsucces - ViewBag.MessageUploadLocalEmpoyee.
+                </div>
+            }
+        }
     </div>
-
 }
-
-
-
-<script language="JavaScript" type="text/javascript">
-     hiddenNotifi();
-    function hiddenNotifi() {
-        $('#divUploadGlobalEmployeeSuccess').addClass("hidden");
-        $('#divUploadLocalEmployeeSuccess').addClass("hidden");
-        $('#divUploadTrainingBasicSuccess').addClass("hidden");
-        $('#divUploadGlobalEmployeeUnSuccess').addClass("hidden");
-        $('#divUploadLocalEmployeeUnSuccess').addClass("hidden");
-        $('#divUploadTrainingBasicUnSuccess').addClass("hidden");
-    }
-
-</script>
-@if (ViewBag.MessageUploadLocalEmpoyee != null)
-{
-    <script language="JavaScript" type="text/javascript">
-        hiddenNotifi();
-        if ('@(ViewBag.MessageUploadLocalEmpoyee)' === "success") {
-            $('#divUploadLocalEmployeeSuccess').removeClass("hidden");
-        } else {
-            $('#divUploadLocalEmployeeUnsuccess').removeClass("hidden");
-        }
-    </script>
-}
-
-
-@if (ViewBag.MessageUploadGlobalEmployee != null)
-{
-    <script language="JavaScript" type="text/javascript">
-        debugger;
-        var a = '@(ViewBag.MessageUploadLocalEmpoyee)';
-        alert(a);
-        hiddenNotifi();
-        if ('@(ViewBag.MessageUploadLocalEmpoyee)' === "success") {
-            $('#divUploadGobalEmployeeSuccess').removeClass("hidden");
-        } else {
-            $('#divUploadGobalEmployeeUnsuccess').removeClass("hidden");
-        }
-    </script>
-}
-
-@if (ViewBag.MessageGlobalTraining != null)
-{
-
-    <script language="JavaScript" type="text/javascript">
-        hiddenNotifi();
-        if ('@(ViewBag.MessageUploadLocalEmpoyee)' === "success") {
-            $('#divUploadTrainingBasicSuccess').removeClass("hidden");
-        } else {
-            $('#divUploadTrainingBasicUnsuccess').removeClass("hidden");
-        }
-    </script>
-}
-
 <style>
     .custom-file-upload {
         display: block;

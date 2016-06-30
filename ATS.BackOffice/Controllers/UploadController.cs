@@ -21,7 +21,6 @@ namespace ATS.BackOffice.Controllers
 
         public UploadController()
         {
-            db = new ATSEntities();
             notSupportFile = "This file format is not supported, Please choose Excel file!";
         }
 
@@ -39,11 +38,10 @@ namespace ATS.BackOffice.Controllers
                 {
                     if (upload != null && upload.ContentLength > 0)
                     {
-                        // We return the interface, so that
                         IExcelDataReader reader = getExcelData(upload);
                         if (reader == null)
                         {
-                            result = "notSupportFile";
+                            result = notSupportFile;
                         }
                         reader.IsFirstRowAsColumnNames = true;
                         DataSet employeeGlobal = reader.AsDataSet();
@@ -69,6 +67,7 @@ namespace ATS.BackOffice.Controllers
         {
             try
             {
+                db = new ATSEntities();
                 dataTable.Columns[0].ColumnName = "UserID";
                 dataTable.Columns[1].ColumnName = "EmpStatus";
                 dataTable.Columns[2].ColumnName = "EmpType";
@@ -119,10 +118,8 @@ namespace ATS.BackOffice.Controllers
                         else
                         {
                             reader.IsFirstRowAsColumnNames = true;
-
                             DataSet dataTrainingGlobal = reader.AsDataSet();
                             reader.Close();
-
                             if (dataTrainingGlobal.Tables.Count > 0)
                             {
                                 DataTable dataTable = new DataTable();
@@ -151,6 +148,7 @@ namespace ATS.BackOffice.Controllers
             string result = "";
             try
             {
+                db = new ATSEntities();
                 dataTable.Columns[0].ColumnName = "ScheduledOfferingID";
                 dataTable.Columns[2].ColumnName = "ItemType";
                 dataTable.Columns[3].ColumnName = "ItemID";
@@ -198,13 +196,18 @@ namespace ATS.BackOffice.Controllers
                         else
                         {
                             reader.IsFirstRowAsColumnNames = true;
-                            reader.Close();
+                          
                             DataSet dataTrainingGlobal = reader.AsDataSet();
+                            reader.Close();
                             if (dataTrainingGlobal.Tables.Count > 0)
                             {
                                 DataTable dataTable = new DataTable();
                                 dataTable = dataTrainingGlobal.Tables[0];
                                 result = UpdateLocalEmployee(dataTable);
+                            }
+                            else
+                            {
+                                result = "ExcelError";
                             }
                         }
                     }
@@ -225,6 +228,7 @@ namespace ATS.BackOffice.Controllers
 
             try
             {
+                db = new ATSEntities();
                 var param = new SqlParameter("@DataTable", SqlDbType.Structured);
                 param.Value = dataTable;
                 param.TypeName = "LocalEmployee";
@@ -245,7 +249,6 @@ namespace ATS.BackOffice.Controllers
             var employees = db.Employees.Where(p => p.IsActive == true).Select(p => p);
             return employees;
         }
-
 
         public ActionResult UploadScanTime(HttpPostedFileBase upload)
         {

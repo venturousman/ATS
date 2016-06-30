@@ -55,5 +55,10 @@ namespace ATS.Data
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("USP_IMPORT_TRAININGBASICDATA");
         }
+    
+        public virtual int USP_IMPORT_LOCALEMPLOYEE()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("USP_IMPORT_LOCALEMPLOYEE");
+        }
     }
 }
