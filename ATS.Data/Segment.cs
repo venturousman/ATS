@@ -14,6 +14,7 @@ namespace ATS.Data
     
     public partial class Segment
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Segment()
         {
             this.Attendances = new HashSet<Attendance>();
@@ -31,7 +32,9 @@ namespace ATS.Data
         public System.DateTime Date { get; set; }
         public bool IsActive { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Attendance> Attendances { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Leave> Leaves { get; set; }
         public virtual Room Room { get; set; }
         public virtual Schedule Schedule { get; set; }

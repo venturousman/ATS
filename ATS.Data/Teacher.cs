@@ -14,6 +14,7 @@ namespace ATS.Data
     
     public partial class Teacher
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Teacher()
         {
             this.Schedules = new HashSet<Schedule>();
@@ -29,6 +30,7 @@ namespace ATS.Data
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public string EmlpoyeeID { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Schedule> Schedules { get; set; }
     }
 }

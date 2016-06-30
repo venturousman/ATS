@@ -14,13 +14,7 @@
             <input type="submit" value="Update" class="btn btn-primary" />
         </div>
     </div>
-    <div class="custom-file-upload row">
-        @*<div class="alert alert-success" id="divNotifiSuccessEmployeeGlobal">
-            <strong>Success!</strong> Upload employee global success!
-        </div>
-        <div class="alert alert-danger" id="divNotifiUnsuccessEmployeeGlobal">
-            <strong>Unload Unsuccess!</strong> Please check your excel file!
-        </div>*@
+    <div>
         @if (ViewBag.listEmployeeGlobals != null && ViewBag.listEmployeeGlobals.Count > 0)
         {
             var girdEmployee = new WebGrid();
@@ -32,17 +26,18 @@
             gridColumns[1] = girdEmployee.Column("EmailAddress", "Email", format: @<text> @item.EmailAddress</text>, style: "name");
 
             @girdEmployee.GetHtml(
-                tableStyle: "GridView",
-                htmlAttributes: new { width = "99%", id = "gdComplaintList" },
-                mode: WebGridPagerModes.All,
-                columns: girdEmployee.Columns(gridColumns))
+        tableStyle: "GridView",
+        htmlAttributes: new { width = "99%", id = "gdComplaintList" },
+        mode: WebGridPagerModes.All,
+        columns: girdEmployee.Columns(gridColumns))
         }
         @*@if (ViewBag.Message != null)
-            {
-                <script language="JavaScript" type="text/javascript">
-                    alert('@ViewBag.Message');
-                </script>
-            }*@
+        {
+            <script language="JavaScript" type="text/javascript">
+                alert('@ViewBag.Message');
+            </script>
+        }*@
+
     </div>
 
 
@@ -63,15 +58,7 @@
 
     </div>
 
-    
 }
-
-@*@if (ViewBag.listEmployeeGlobals.ToString() == "success")
-    {
-        <script language="JavaScript" type="text/javascript">
-          
-        </script>
-    }*@
 
 @using (Html.BeginForm("UploadLocalEmployee", "Upload", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
@@ -84,14 +71,7 @@
             <input type="submit" value="Update" class="btn btn-primary" />
         </div>
     </div>
-    <div class="custom-file-upload row">
-        @*<div class="alert alert-success" id="divNotifiSuccessEmployeeLocal">
-            <strong>Success!</strong> Upload employee local success!
-        </div>
-        <div class="alert alert-danger" id="divNotifiUnsuccessEmployeeLocal">
-            <strong>Unload Unsuccess!</strong> Please check your excel file!
-        </div>*@
-
+    <div>
         @if (ViewBag.listEmployee != null && ViewBag.listEmployee.Count > 0)
         {
             var girdEmployee = new WebGrid();
@@ -110,23 +90,25 @@
             gridColumns[8] = girdEmployee.Column("ModifiedDate", "Last modified", format: @<text> @item.ModifiedDate</text>, style: "name");
             @girdEmployee.GetHtml(
                 tableStyle: "GridView",
-                htmlAttributes: new { width = "99%", id = "gdComplaintList" },
+                htmlAttributes: new {width = "99%", id = "gdComplaintList"},
                 mode: WebGridPagerModes.All,
                 columns: girdEmployee.Columns(gridColumns))
+            
+
         }
+
+
     </div>
-
-
+    
+   
 }
 
-@if (ViewBag.Message != null)
-{
-    <script language="JavaScript" type="text/javascript">
-        alert('@ViewBag.Message');
-    </script>
-}
-
-
+ @if (ViewBag.Message != null)
+        {
+            <script language="JavaScript" type="text/javascript">
+                alert('@ViewBag.Message');
+            </script>
+        }
 
 <script>
 

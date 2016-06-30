@@ -14,11 +14,12 @@ namespace ATS.Data
     
     public partial class Room
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Room()
         {
             this.Attendances = new HashSet<Attendance>();
-            this.Room_TerminalMapping = new HashSet<Room_TerminalMapping>();
             this.Segments = new HashSet<Segment>();
+            this.TerminalMasters = new HashSet<TerminalMaster>();
         }
     
         public System.Guid RoomID { get; set; }
@@ -31,8 +32,11 @@ namespace ATS.Data
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public bool IsActive { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Attendance> Attendances { get; set; }
-        public virtual ICollection<Room_TerminalMapping> Room_TerminalMapping { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Segment> Segments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TerminalMaster> TerminalMasters { get; set; }
     }
 }

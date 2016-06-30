@@ -14,6 +14,7 @@ namespace ATS.Data
     
     public partial class Schedule
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Schedule()
         {
             this.Segments = new HashSet<Segment>();
@@ -33,11 +34,12 @@ namespace ATS.Data
         public System.DateTime CreatedDate { get; set; }
         public string ModifiedBy { get; set; }
         public System.DateTime ModifiedDate { get; set; }
-        public bool IsActive { get; set; }
     
         public virtual Course Course { get; set; }
         public virtual Teacher Teacher { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Segment> Segments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TrainingEmployee> TrainingEmployees { get; set; }
     }
 }

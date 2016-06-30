@@ -14,6 +14,7 @@ namespace ATS.Data
     
     public partial class Organization
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Organization()
         {
             this.EmployeeGlobals = new HashSet<EmployeeGlobal>();
@@ -21,11 +22,9 @@ namespace ATS.Data
     
         public int OrganizationID { get; set; }
         public string OrganizationName { get; set; }
-        public Nullable<int> ParentID { get; set; }
-        public Nullable<int> TypeID { get; set; }
         public bool IsActive { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmployeeGlobal> EmployeeGlobals { get; set; }
-        public virtual OrganizationType OrganizationType { get; set; }
     }
 }

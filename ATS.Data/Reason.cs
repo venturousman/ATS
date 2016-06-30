@@ -14,6 +14,7 @@ namespace ATS.Data
     
     public partial class Reason
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Reason()
         {
             this.Leaves = new HashSet<Leave>();
@@ -25,6 +26,7 @@ namespace ATS.Data
         public System.DateTime CreatedDate { get; set; }
         public bool IsActive { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Leave> Leaves { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'D:\Innovation\Code2\ATS.Data\ATSModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\TIN\Documents\Github\ATS\ATS.Data\ATSModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

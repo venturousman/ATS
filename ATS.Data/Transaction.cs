@@ -20,6 +20,5 @@ namespace ATS.Data
         public System.DateTime Time { get; set; }
         public System.Guid RoomID { get; set; }
         public bool InOut { get; set; }
-        public System.DateTime CreatedDate { get; set; }
     }
 }
