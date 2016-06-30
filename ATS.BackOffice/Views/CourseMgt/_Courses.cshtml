@@ -1,0 +1,20 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@section Title{
+    @{if (IsSectionDefined("Title"))
+        {
+            @RenderSection("Title", false);
+        }
+        else {
+            @Html.GetTitlePage("Course");
+        }
+    }
+
+}
+
+
+@RenderBody()

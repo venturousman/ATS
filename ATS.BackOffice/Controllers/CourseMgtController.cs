@@ -8,21 +8,64 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ATS.Data;
+using X.PagedList;
+
 
 namespace ATS.BackOffice.Controllers
 {
     public class CourseMgtController : Controller
     {
-        private const string INDEX_PAGE = "Index";
+        public const string INDEX_PAGE = "Index";
         private ATSEntities db = null;
         public CourseMgtController(ATSEntities entites)
         {
             db = entites;
         }
         // GET: CourseMgt
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            return View(await db.Courses.ToListAsync());
+
+            var courses = db.Courses.AsQueryable();
+
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.ActiveSortParm = sortOrder == "Active" ? "active_desc" : "Active";            
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+           
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                courses = courses.Where(c => c.Name.Contains(searchString)
+                                       || c.Note.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    courses = courses.OrderByDescending(s => s.Name);
+                    break;
+                case "Active":
+                    courses = courses.OrderBy(s => s.IsActive);
+                    break;
+                case "active_desc":
+                    courses = courses.OrderByDescending(c => c.IsActive);
+                    break;
+                default:  // Name ascending 
+                    courses = courses.OrderBy(c => c.Name);
+                    break;
+            }
+
+            int pageNumber = (page ?? 1);
+            return View(await courses.ToPagedListAsync(pageNumber, HtmlHelperExtensions.PAGE_SIZE));
+            
         }
 
         // GET: CourseMgt/Details/5

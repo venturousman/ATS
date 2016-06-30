@@ -12,5 +12,9 @@ namespace ATS.BackOffice.Controllers
         {
             return View();
         }
+        public ActionResult GeneralReport()
+        {
+            return View();
+        }
     }
 }

@@ -18,6 +18,7 @@ namespace ATS.BackOffice
                 "~/Scripts/jquery.unobtrusive*",
                 "~/Scripts/jquery.validate*"));
 
+            #region not used, disable temporarily
             //bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
             //    "~/Scripts/knockout-{version}.js",
             //    "~/Scripts/knockout.validation.js"));
@@ -28,21 +29,24 @@ namespace ATS.BackOffice
             //    "~/Scripts/app/app.datamodel.js",
             //    "~/Scripts/app/app.viewmodel.js",
             //    "~/Scripts/app/home.viewmodel.js",
-            //    "~/Scripts/app/_run.js"));
+            //    "~/Scripts/app/_run.js")); 
+            #endregion
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                 "~/Scripts/modernizr-*"));
 
+            #region not used, disable temporarily
             /*bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                "~/Scripts/bootstrap.js",
-                "~/Scripts/respond.js"));
-            */
+                   "~/Scripts/bootstrap.js",
+                   "~/Scripts/respond.js"));
+               */
 
             //bundles.Add(new StyleBundle("~/Content/css").Include(
             //     "~/Content/bootstrap.css",
-            //     "~/Content/Site.css"));
+            //     "~/Content/Site.css")); 
+            #endregion
 
             #region AdminLTE main scripts and plugins
             bundles.Add(new ScriptBundle("~/bundles/AdminLTEScripts").Include(
@@ -75,17 +79,7 @@ namespace ATS.BackOffice
                     "~/Themes/AdminLTE-2.3.3/dist/js/app.min.js"));
             #endregion
 
-            #region AdminLTE CSS
-            //bundles.Add(new StyleBundle("~/bundles/AdminLTEStyles").Include(
-            //        //Bootstrap 3.3.6
-            //        "~/Themes/AdminLTE-2.3.3/bootstrap/css/bootstrap.min.css",
-            //        "~/Content/bootstrap.css",
-            //        "~/Content/Site.css"));
-            //var lessBundle = new StyleBundle("~/bundles/AdminLTEStyles").Include(
-            //    "~/Themes/AdminLTE-2.3.3/build/less/AdminLTE.less",
-            //    "~/Themes/AdminLTE-2.3.3/build/less/skins/_all-skins.less",
-            //    "~/Themes/AdminLTE-2.3.3/build/less/test.less");
-
+            #region AdminLTE CSS           
 
             var lessBundle = new StyleBundle("~/bundles/AdminLTEStyles").Include(
                 "~/Themes/AdminLTE-2.3.3/bootstrap/css/bootstrap.min.css",

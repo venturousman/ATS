@@ -7,10 +7,10 @@
             string avatarURL = Html.GetCurrentLoginUserAvatar();
             if (IsSectionDefined("Title"))
             {
-                RenderSection("Title");
+                @RenderSection("Title",false);
             }
             else {
-                @Html.Raw("Attendance Tracking System");
+                @Html.GetTitlePage();
             }
         }
     </title>
@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    
     @Styles.Render("~/bundles/AdminLTEStyles")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -79,11 +80,7 @@
                                 }
                                 <span class="hidden-xs">@Html.GetCurrentLoginUserName()</span>
                             </a>
-                        </li>
-                        <!-- Control Sidebar Toggle Button -->
-                        <li>
-                            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-                        </li>
+                        </li>                        
                     </ul>
                 </div>
             </nav>
@@ -118,7 +115,7 @@
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu">
                     <li class="header">INFORMATION MANAGEMENT</li>
-                    <li class="active treeview">
+                    <li class="treeview">
                         <a href="#">
                             <i class="fa fa-users"></i> <span>Employess</span> <i class="fa fa-angle-left pull-right"></i>
                         </a>
@@ -127,7 +124,7 @@
                             <li><a href="#"><i class="fa fa-circle-o"></i>Employees Import</a></li>
                         </ul>
                     </li>
-                    <li class="active treeview">
+                    <li class="treeview">
                         <a href="#">
                             <i class="fa fa-microphone"></i> <span>Teachers</span> <i class="fa fa-angle-left pull-right"></i>
                         </a>
@@ -136,18 +133,17 @@
                             <li><a href="#"><i class="fa fa-circle-o"></i>Create</a></li>
                         </ul>
                     </li>
-                    <li class="active treeview">
+                    <li class="treeview">
                         <a href="#">
-                            <i class="fa fa-calendar-o"></i> <span>Training</span> <i class="fa fa-angle-left pull-right"></i>
+                            <i class="fa fa-calendar-o"></i> <span>Courses</span> <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="#"><i class="fa fa-circle-o"></i>List</a></li>
-                            <li><a href="#"><i class="fa fa-circle-o"></i>Create</a></li>
-                            <li><a href="#"><i class="fa fa-circle-o"></i>Training Import</a></li>
+                            <li><a href="@Url.Action("Index","CourseMgt")"><i class="fa fa-circle-o"></i>List</a></li>                            
+                            <li><a href="#"><i class="fa fa-circle-o"></i>Courses Import</a></li>
                         </ul>
                     </li>
 
-                    <li class="active treeview">
+                    <li class="treeview">
                         <a href="#">
                             <i class="fa fa-calendar-plus-o"></i> <span>Schedules</span> <i class="fa fa-angle-left pull-right"></i>
                         </a>
@@ -156,7 +152,7 @@
                             <li><a href="#"><i class="fa fa-circle-o"></i>Create</a></li>
                         </ul>
                     </li>
-                    <li class="active treeview">
+                    <li class="treeview">
                         <a href="#">
                             <i class="fa fa-calendar"></i> <span>Segments</span> <i class="fa fa-angle-left pull-right"></i>
                         </a>
@@ -166,7 +162,7 @@
                         </ul>
                     </li>
 
-                    <li class="active treeview">
+                    <li class="treeview">
                         <a href="#">
                             <i class="fa fa-file-excel-o"></i> <span>Attendance</span> <i class="fa fa-angle-left pull-right"></i>
                         </a>
@@ -183,15 +179,14 @@
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="#"><i class="fa fa-circle-o"></i> Report 1</a></li>
-                            <li><a href="#"><i class="fa fa-circle-o"></i> Report 2</a></li>
-                            <li><a href="#"><i class="fa fa-circle-o"></i> Report 3</a></li>
-                            <li><a href="#"><i class="fa fa-circle-o"></i> Report 4</a></li>
-                            <li><a href="#"><i class="fa fa-circle-o"></i> Report 5</a></li>
-                            <li><a href="#"><i class="fa fa-circle-o"></i> Report 6</a></li>
-                            <li><a href="#"><i class="fa fa-circle-o"></i> Report 7</a></li>
-                            <li><a href="#"><i class="fa fa-circle-o"></i> Report 8</a></li>
-                            <li><a href="#"><i class="fa fa-circle-o"></i> Report 9</a></li>
+                            <li><a href="@Url.Action("GeneralReport","Home")"><i class="fa fa-circle-o"></i> General</a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i> Skills</a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i> Dept applied</a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i> Schedule status</a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i> Schedule status</a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i> Attendance</a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i> Attendance tracking</a></li>
+                            
                         </ul>
                     </li>
                 </ul>
@@ -214,7 +209,7 @@
                                 <p>Segments</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-bag"></i>
+                                <i class="ion ion-ios-list-outline"></i>
                             </div>
                             <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                         </div>
