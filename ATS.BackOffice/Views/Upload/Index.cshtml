@@ -1,7 +1,6 @@
 ﻿@model IList<ATS.Data.Employee>
 <script language="JavaScript" type="text/javascript" src="/Scripts/jquery-2.2.3.min.js"></script>
-@*<script language="JavaScript" type="text/javascript" src="/Scripts/jquery-ui-personalized-2.2.3.packed.js"></script>
-    <script language="JavaScript" type="text/javascript" src="/Scripts/sprinkle.js"></script>*@
+<script language="JavaScript" type="text/javascript" src="/Scripts/jquery-2.2.3.js"></script>
 
 @using (Html.BeginForm("UploadGlobalEmployee", "Upload", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
@@ -15,29 +14,13 @@
         </div>
     </div>
     <div>
-        @if (ViewBag.listEmployeeGlobals != null && ViewBag.listEmployeeGlobals.Count > 0)
-        {
-            var girdEmployee = new WebGrid();
-            WebGridColumn[] gridColumns;
-            girdEmployee = new WebGrid(ViewBag.listEmployeeGlobals, canPage: true, rowsPerPage: 8);
+        <div class="alert alert-success " id="divUploadGlobalEmployeeSuccess">
+            <strong>Upload Success!</strong> Upload employee global succes.
+        </div>
 
-            gridColumns = new WebGridColumn[2];
-            gridColumns[0] = girdEmployee.Column("GlobalID", "Global ID", format: @<text> @item.GlobalID </text>, style: "grp");
-            gridColumns[1] = girdEmployee.Column("EmailAddress", "Email", format: @<text> @item.EmailAddress</text>, style: "name");
-
-            @girdEmployee.GetHtml(
-        tableStyle: "GridView",
-        htmlAttributes: new { width = "99%", id = "gdComplaintList" },
-        mode: WebGridPagerModes.All,
-        columns: girdEmployee.Columns(gridColumns))
-        }
-        @*@if (ViewBag.Message != null)
-        {
-            <script language="JavaScript" type="text/javascript">
-                alert('@ViewBag.Message');
-            </script>
-        }*@
-
+        <div class="alert alert-danger " id="divUploadGlobalEmployeeUnSuccess">
+            <strong>Upload Unsuccess!</strong> Upload employee global unsucces.
+        </div>
     </div>
 
 
@@ -55,7 +38,12 @@
         </div>
     </div>
     <div>
-
+        <div class="alert alert-success " id="divUploadTrainingBasicSuccess">
+            <strong>Upload Success!</strong> Upload training basic succes.
+        </div>
+        <div class="alert alert-danger " id="divUploadTrainingBasicUnSuccess">
+            <strong>Upload Unsuccess!</strong> Upload training basic unsucces.
+        </div>
     </div>
 
 }
@@ -71,48 +59,73 @@
             <input type="submit" value="Update" class="btn btn-primary" />
         </div>
     </div>
+
     <div>
-        @if (ViewBag.listEmployee != null && ViewBag.listEmployee.Count > 0)
-        {
-            var girdEmployee = new WebGrid();
-            WebGridColumn[] gridColumns;
-            girdEmployee = new WebGrid(ViewBag.listEmployee, canPage: true, rowsPerPage: 8);
-
-            gridColumns = new WebGridColumn[9];
-            gridColumns[0] = girdEmployee.Column("EmployeeID", "Employee ID", format: @<text> @item.EmployeeID </text>, style: "grp");
-            gridColumns[1] = girdEmployee.Column("NTID", "NTID", format: @<text> @item.NTID</text>, style: "name");
-            gridColumns[2] = girdEmployee.Column("CardID", "CardID", format: @<text> @item.CardID</text>, style: "name");
-            gridColumns[3] = girdEmployee.Column("FirstName", "First name", format: @<text> @item.FirstName</text>, style: "name");
-            gridColumns[4] = girdEmployee.Column("MiddleName", "Middle name", format: @<text> @item.MiddleName</text>, style: "name");
-            gridColumns[5] = girdEmployee.Column("LastName", "Last name", format: @<text> @item.LastName</text>, style: "name");
-            gridColumns[6] = girdEmployee.Column("OrganizationName", "Organization", format: @<text> @item.OrganizationName</text>, style: "name");
-            gridColumns[7] = girdEmployee.Column("Supervisor", "Supervisor", format: @<text> @item.Supervisor</text>, style: "name");
-            gridColumns[8] = girdEmployee.Column("ModifiedDate", "Last modified", format: @<text> @item.ModifiedDate</text>, style: "name");
-            @girdEmployee.GetHtml(
-                tableStyle: "GridView",
-                htmlAttributes: new {width = "99%", id = "gdComplaintList"},
-                mode: WebGridPagerModes.All,
-                columns: girdEmployee.Columns(gridColumns))
-            
-
-        }
-
-
+        <div class="alert alert-success " id="divUploadLocalEmployeeSuccess">
+            <strong>Upload Success!</strong> Upload employee local succes.
+        </div>
+        <div class="alert alert-danger " id="divUploadLocalEmployeeUnSuccess">
+            <strong>Upload Unsuccess!</strong> Upload employee local unsucces.
+        </div>
     </div>
-    
-   
+
 }
 
- @if (ViewBag.Message != null)
-        {
-            <script language="JavaScript" type="text/javascript">
-                alert('@ViewBag.Message');
-            </script>
-        }
 
-<script>
+
+<script language="JavaScript" type="text/javascript">
+     hiddenNotifi();
+    function hiddenNotifi() {
+        $('#divUploadGlobalEmployeeSuccess').addClass("hidden");
+        $('#divUploadLocalEmployeeSuccess').addClass("hidden");
+        $('#divUploadTrainingBasicSuccess').addClass("hidden");
+        $('#divUploadGlobalEmployeeUnSuccess').addClass("hidden");
+        $('#divUploadLocalEmployeeUnSuccess').addClass("hidden");
+        $('#divUploadTrainingBasicUnSuccess').addClass("hidden");
+    }
 
 </script>
+@if (ViewBag.MessageUploadLocalEmpoyee != null)
+{
+    <script language="JavaScript" type="text/javascript">
+        hiddenNotifi();
+        if ('@(ViewBag.MessageUploadLocalEmpoyee)' === "success") {
+            $('#divUploadLocalEmployeeSuccess').removeClass("hidden");
+        } else {
+            $('#divUploadLocalEmployeeUnsuccess').removeClass("hidden");
+        }
+    </script>
+}
+
+
+@if (ViewBag.MessageUploadGlobalEmployee != null)
+{
+    <script language="JavaScript" type="text/javascript">
+        debugger;
+        var a = '@(ViewBag.MessageUploadLocalEmpoyee)';
+        alert(a);
+        hiddenNotifi();
+        if ('@(ViewBag.MessageUploadLocalEmpoyee)' === "success") {
+            $('#divUploadGobalEmployeeSuccess').removeClass("hidden");
+        } else {
+            $('#divUploadGobalEmployeeUnsuccess').removeClass("hidden");
+        }
+    </script>
+}
+
+@if (ViewBag.MessageGlobalTraining != null)
+{
+
+    <script language="JavaScript" type="text/javascript">
+        hiddenNotifi();
+        if ('@(ViewBag.MessageUploadLocalEmpoyee)' === "success") {
+            $('#divUploadTrainingBasicSuccess').removeClass("hidden");
+        } else {
+            $('#divUploadTrainingBasicUnsuccess').removeClass("hidden");
+        }
+    </script>
+}
+
 <style>
     .custom-file-upload {
         display: block;

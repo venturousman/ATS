@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+    <div>
+        @if (ViewBag.listEmployee != null && ViewBag.listEmployee.Count > 0)
+        {
+            var girdEmployee = new WebGrid();
+            WebGridColumn[] gridColumns;
+            girdEmployee = new WebGrid(ViewBag.listEmployee, canPage: true, rowsPerPage: 8);
+
+            gridColumns = new WebGridColumn[9];
+            gridColumns[0] = girdEmployee.Column("EmployeeID", "Employee ID", format: @<text> @item.EmployeeID </text>, style: "grp");
+            gridColumns[1] = girdEmployee.Column("NTID", "NTID", format: @<text> @item.NTID</text>, style: "name");
+            gridColumns[2] = girdEmployee.Column("CardID", "CardID", format: @<text> @item.CardID</text>, style: "name");
+            gridColumns[3] = girdEmployee.Column("FirstName", "First name", format: @<text> @item.FirstName</text>, style: "name");
+            gridColumns[4] = girdEmployee.Column("MiddleName", "Middle name", format: @<text> @item.MiddleName</text>, style: "name");
+            gridColumns[5] = girdEmployee.Column("LastName", "Last name", format: @<text> @item.LastName</text>, style: "name");
+            gridColumns[6] = girdEmployee.Column("OrganizationName", "Organization", format: @<text> @item.OrganizationName</text>, style: "name");
+            gridColumns[7] = girdEmployee.Column("Supervisor", "Supervisor", format: @<text> @item.Supervisor</text>, style: "name");
+            gridColumns[8] = girdEmployee.Column("ModifiedDate", "Last modified", format: @<text> @item.ModifiedDate</text>, style: "name");
+            @girdEmployee.GetHtml(
+                tableStyle: "GridView",
+                htmlAttributes: new {width = "99%", id = "gdComplaintList"},
+                mode: WebGridPagerModes.All,
+                columns: girdEmployee.Columns(gridColumns))
+            
+
+        }
+
+    </div>
+    
+ @*@if (ViewBag.listEmployee != null && ViewBag.listEmployee.Count > 0)
+        {
+            var girdEmployee = new WebGrid();
+            WebGridColumn[] gridColumns;
+            girdEmployee = new WebGrid(ViewBag.listEmployee, canPage: true, rowsPerPage: 8);
+
+            gridColumns = new WebGridColumn[9];
+            gridColumns[0] = girdEmployee.Column("EmployeeID", "Employee ID", format: @<text> @item.EmployeeID </text>, style: "grp");
+            gridColumns[1] = girdEmployee.Column("NTID", "NTID", format: @<text> @item.NTID</text>, style: "name");
+            gridColumns[2] = girdEmployee.Column("CardID", "CardID", format: @<text> @item.CardID</text>, style: "name");
+            gridColumns[3] = girdEmployee.Column("FirstName", "First name", format: @<text> @item.FirstName</text>, style: "name");
+            gridColumns[4] = girdEmployee.Column("MiddleName", "Middle name", format: @<text> @item.MiddleName</text>, style: "name");
+            gridColumns[5] = girdEmployee.Column("LastName", "Last name", format: @<text> @item.LastName</text>, style: "name");
+            gridColumns[6] = girdEmployee.Column("OrganizationName", "Organization", format: @<text> @item.OrganizationName</text>, style: "name");
+            gridColumns[7] = girdEmployee.Column("Supervisor", "Supervisor", format: @<text> @item.Supervisor</text>, style: "name");
+            gridColumns[8] = girdEmployee.Column("ModifiedDate", "Last modified", format: @<text> @item.ModifiedDate</text>, style: "name");
+            @girdEmployee.GetHtml(
+                tableStyle: "GridView",
+                htmlAttributes: new {width = "99%", id = "gdComplaintList"},
+                mode: WebGridPagerModes.All,
+                columns: girdEmployee.Columns(gridColumns))
+
+
+        }*@

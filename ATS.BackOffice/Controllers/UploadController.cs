@@ -17,6 +17,14 @@ namespace ATS.BackOffice.Controllers
     {
         private ATSEntities db;
         // GET: Upload
+        private string notSupportFile = null;
+
+        public UploadController()
+        {
+            db = new ATSEntities();
+            notSupportFile = "This file format is not supported, Please choose Excel file!";
+        }
+
         public ActionResult Index()
         {
             return View();
@@ -31,32 +39,15 @@ namespace ATS.BackOffice.Controllers
                 {
                     if (upload != null && upload.ContentLength > 0)
                     {
-                        // ExcelDataReader works with the binary Excel file, so it needs a FileStream
-                        // to get started. This is how we avoid dependencies on ACE or Interop:
-                        Stream stream = upload.InputStream;
-
                         // We return the interface, so that
-                        IExcelDataReader reader = null;
-
-                        if (upload.FileName.EndsWith(".xls"))
+                        IExcelDataReader reader = getExcelData(upload);
+                        if (reader == null)
                         {
-                            reader = ExcelReaderFactory.CreateBinaryReader(stream);
+                            result = "notSupportFile";
                         }
-                        else if (upload.FileName.EndsWith(".xlsx"))
-                        {
-                            reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
-                        }
-                        else
-                        {
-                            //will check in javascript
-                            ModelState.AddModelError("File", "This file format is not supported");
-                        }
-
                         reader.IsFirstRowAsColumnNames = true;
-
                         DataSet employeeGlobal = reader.AsDataSet();
                         reader.Close();
-
                         if (employeeGlobal.Tables.Count > 0)
                         {
                             DataTable dataTable = new DataTable();
@@ -64,24 +55,14 @@ namespace ATS.BackOffice.Controllers
                             result = UpdateGlobalEmployee(dataTable);
                         }
                     }
-                    else
-                    {
-                        // ModelState.AddModelError("File", "Please Upload Your file");
-                    }
                 }
-                var a = GetEmployeeGlobals().ToList();
-                ViewBag.Message = result;
-                if (result == "Success!")
-                {
-                    ViewBag.listEmployeeGlobals = GetEmployeeGlobals().ToList();
-                }
-                return View("Index");
             }
             catch (Exception ex)
             {
-                ViewBag.Message = result;
-                return View("Index");
+                result = "Cannot upload this file!";
             }
+            ViewBag.MessageUploadGlobalEmployee = result;
+            return View("Index");
         }
 
         private string UpdateGlobalEmployee(DataTable dataTable)
@@ -113,7 +94,7 @@ namespace ATS.BackOffice.Controllers
                 param.Value = dataTable;
                 param.TypeName = "GlobalEmployee";
                 db.Database.ExecuteSqlCommand("EXEC USP_IMPORT_GLOBALEMPLOYEE @DataTable", param);
-                return "Success!";
+                return "success";
             }
             catch (Exception ex)
             {
@@ -123,43 +104,31 @@ namespace ATS.BackOffice.Controllers
 
         public ActionResult UploadGlobalTraining(HttpPostedFileBase upload)
         {
+            string result = "";
             try
             {
-                string result = "";
                 if (ModelState.IsValid)
                 {
                     if (upload != null && upload.ContentLength > 0)
                     {
-                        // ExcelDataReader works with the binary Excel file, so it needs a FileStream
-                        // to get started. This is how we avoid dependencies on ACE or Interop:
-                        Stream stream = upload.InputStream;
-                        // We return the interface, so that
-                        IExcelDataReader reader = null;
-
-                        if (upload.FileName.EndsWith(".xls"))
+                        IExcelDataReader reader = getExcelData(upload);
+                        if (reader == null)
                         {
-                            reader = ExcelReaderFactory.CreateBinaryReader(stream);
-                        }
-                        else if (upload.FileName.EndsWith(".xlsx"))
-                        {
-                            reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+                            result = notSupportFile;
                         }
                         else
                         {
-                            //will check in javascript
-                            ModelState.AddModelError("File", "This file format is not supported");
-                        }
+                            reader.IsFirstRowAsColumnNames = true;
 
-                        reader.IsFirstRowAsColumnNames = true;
+                            DataSet dataTrainingGlobal = reader.AsDataSet();
+                            reader.Close();
 
-                        DataSet dataTrainingGlobal = reader.AsDataSet();
-                        reader.Close();
-
-                        if (dataTrainingGlobal.Tables.Count > 0)
-                        {
-                            DataTable dataTable = new DataTable();
-                            dataTable = dataTrainingGlobal.Tables[0];
-                            result = UpdateGlobalTraining(dataTable);
+                            if (dataTrainingGlobal.Tables.Count > 0)
+                            {
+                                DataTable dataTable = new DataTable();
+                                dataTable = dataTrainingGlobal.Tables[0];
+                                result = UpdateGlobalTraining(dataTable);
+                            }
                         }
                     }
                     else
@@ -167,13 +136,14 @@ namespace ATS.BackOffice.Controllers
                         // ModelState.AddModelError("File", "Please Upload Your file");
                     }
                 }
-                ViewBag.Message = result;
-                return View("Index");
+             
             }
             catch (Exception)
             {
-                throw;
+                result = "Upload not success!";
             }
+            ViewBag.MessageGlobalTraining = result;
+            return View("Index");
         }
 
         private string UpdateGlobalTraining(DataTable dataTable)
@@ -202,7 +172,7 @@ namespace ATS.BackOffice.Controllers
                 param.Value = dataTable;
                 param.TypeName = "TrainingBasicData";
                 db.Database.ExecuteSqlCommand("EXEC USP_IMPORT_TRAININGBASICDATA @DataTable", param);
-                result = "Success!";
+                result = "success";
             }
             catch (Exception ex)
             {
@@ -213,61 +183,40 @@ namespace ATS.BackOffice.Controllers
 
         public ActionResult UploadLocalEmployee(HttpPostedFileBase upload)
         {
+            string result = "";
             try
             {
-                string result = "";
                 if (ModelState.IsValid)
                 {
                     if (upload != null && upload.ContentLength > 0)
                     {
-                        // ExcelDataReader works with the binary Excel file, so it needs a FileStream
-                        // to get started. This is how we avoid dependencies on ACE or Interop:
-                        Stream stream = upload.InputStream;
-                        // We return the interface, so that
-                        IExcelDataReader reader = null;
-
-                        if (upload.FileName.EndsWith(".xls"))
+                        IExcelDataReader reader = getExcelData(upload);
+                        if (reader == null)
                         {
-                            reader = ExcelReaderFactory.CreateBinaryReader(stream);
-                        }
-                        else if (upload.FileName.EndsWith(".xlsx"))
-                        {
-                            reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+                            result = notSupportFile;
                         }
                         else
                         {
-                            //will check in javascript
-                            ModelState.AddModelError("File", "This file format is not supported");
-                        }
-
-                        reader.IsFirstRowAsColumnNames = true;
-
-                        DataSet dataTrainingGlobal = reader.AsDataSet();
-                        reader.Close();
-
-                        if (dataTrainingGlobal.Tables.Count > 0)
-                        {
-                            DataTable dataTable = new DataTable();
-                            dataTable = dataTrainingGlobal.Tables[0];
-                            result = UpdateLocalEmployee(dataTable);
+                            reader.IsFirstRowAsColumnNames = true;
+                            reader.Close();
+                            DataSet dataTrainingGlobal = reader.AsDataSet();
+                            if (dataTrainingGlobal.Tables.Count > 0)
+                            {
+                                DataTable dataTable = new DataTable();
+                                dataTable = dataTrainingGlobal.Tables[0];
+                                result = UpdateLocalEmployee(dataTable);
+                            }
                         }
                     }
-                    else
-                    {
-                        // ModelState.AddModelError("File", "Please Upload Your file");
-                    }
+                   
                 }
-                if (result == "Success!")
-                {
-                    ViewBag.listEmployee = GetEmployees().ToList();
-                }
-                ViewBag.Message = result;
-                return View("Index");
             }
             catch (Exception)
             {
-                throw;
+                result = "Upload not success!";
             }
+            ViewBag.MessageUploadLocalEmpoyee = result;
+            return View("Index");
         }
 
         private string UpdateLocalEmployee(DataTable dataTable)
@@ -281,7 +230,7 @@ namespace ATS.BackOffice.Controllers
                 param.TypeName = "LocalEmployee";
 
                 db.Database.ExecuteSqlCommand("EXEC USP_IMPORT_LOCALEMPLOYEE @DataTable", param);
-                result = "Success!";
+                result = "success";
             }
             catch (Exception ex)
             {
@@ -297,11 +246,6 @@ namespace ATS.BackOffice.Controllers
             return employees;
         }
 
-        public IQueryable<EmployeeGlobal> GetEmployeeGlobals()
-        {
-            var employeeGlobals = db.EmployeeGlobals.Select(p => p);
-            return employeeGlobals;
-        }
 
         public ActionResult UploadScanTime(HttpPostedFileBase upload)
         {
@@ -390,6 +334,26 @@ namespace ATS.BackOffice.Controllers
             {
                 throw;
             }
+        }
+
+
+        private IExcelDataReader getExcelData(HttpPostedFileBase upload)
+        {
+            // ExcelDataReader works with the binary Excel file, so it needs a FileStream
+            // to get started. This is how we avoid dependencies on ACE or Interop:
+            Stream stream = upload.InputStream;
+            IExcelDataReader reader = null;
+
+            if (upload.FileName.EndsWith(".xls"))
+            {
+                reader = ExcelReaderFactory.CreateBinaryReader(stream);
+            }
+            else if (upload.FileName.EndsWith(".xlsx"))
+            {
+                reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+            }
+
+            return reader;
         }
     }
 }
