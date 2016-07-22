@@ -43,6 +43,7 @@ namespace ATS.BackOffice.Controllers
         // GET: CourseMgt/Create
         public ActionResult Create()
         {
+            //áaaa
             return View();
         }
 
