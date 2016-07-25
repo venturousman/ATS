@@ -1443,6 +1443,7 @@
     <Content Include="Views\CourseMgt\_CreateButton.cshtml" />
     <Content Include="Views\Home\GeneralReport.cshtml" />
     <Content Include="TimeData\Msg20160608.log" />
+    <Content Include="Views\Upload\UploadGlobalTraining.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

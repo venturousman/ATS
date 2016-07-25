@@ -29,6 +29,11 @@ namespace ATS.BackOffice.Controllers
             return View();
         }
 
+        public ActionResult TrainingGlobalUpload()
+        {
+            return View("UploadGlobalTraining");
+        }
+
         public ActionResult UploadGlobalEmployee(HttpPostedFileBase upload)
         {
             string result = "";
@@ -140,7 +145,7 @@ namespace ATS.BackOffice.Controllers
                 result = "Upload not success!";
             }
             ViewBag.MessageGlobalTraining = result;
-            return View("Index");
+            return View("UploadGlobalTraining");
         }
 
         private string UpdateGlobalTraining(DataTable dataTable)

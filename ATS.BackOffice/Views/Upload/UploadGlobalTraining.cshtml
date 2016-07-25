@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "UploadGlobalTraining";
+}
+
+
+<section class="col-lg connectedSortable">
+
+    <div class="box box-primary">
+        <div class="box-header">
+            <i class="fa fa-calendar-o"></i>
+            <h3 class="box-title">Upload</h3>
+        </div>
+
+        <div class="box-footer clearfix">
+            footer
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            @using (Html.BeginForm("UploadGlobalTraining", "Upload", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="custom-file-upload row">
+                    <div class="col-md-7">
+                        <label for="file"><i class="fa fa-file-excel-o"></i>&nbsp; Global training: </label>
+                        <input type="file" id="fileDataTraining" name="upload" accept=".xlsx" />
+                    </div>
+                    <div class="col-md-2">
+                        <input type="submit" value="Upload" class="btn btn-block btn-primary btn-flat" />
+                    </div>
+                    <div class="col-md-2">
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-9">
+                        @if (ViewBag.MessageGlobalTraining != null)
+                            {
+                                if (ViewBag.MessageGlobalTraining == "success")
+                                {
+                                            <div class="alert alert-success " id="divUploadTrainingBasicSuccess">
+                                                <strong>Upload Success!</strong> Upload training basic succes.
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="alert alert-danger " id="divUploadTrainingBasicUnSuccess">
+                                                <strong>Upload Unsuccess!</strong> Upload training basic unsucces.
+                                            </div>
+                                        }
+                              }
+                    </div>
+                </div>
+            }
+            <!-- /.box-body -->
+        </div>
+    </div>
+</section>

@@ -1,102 +1,88 @@
 ﻿@model IList<ATS.Data.Employee>
-<script language="JavaScript" type="text/javascript" src="/Scripts/jquery-2.2.3.min.js"></script>
-<script language="JavaScript" type="text/javascript" src="/Scripts/jquery-2.2.3.js"></script>
 
-@using (Html.BeginForm("UploadGlobalEmployee", "Upload", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    <div class="custom-file-upload row">
-        <div class="col-md-8">
-            <label for="file">Upload global employees: </label>
-            <input type="file" id="dataFileGlobalEmployee" name="upload" accept=".xlsx" />
-        </div>
-        <div class="col-md-4">
-            <input type="submit" value="Update" class="btn btn-primary" />
-        </div>
-    </div>
-    <div>
-        @if (ViewBag.MessageUploadGlobalEmployee != null)
-        {
-            if (ViewBag.MessageUploadGlobalEmployee == "success")
-            {
-                <div class="alert alert-success " id="divUploadGlobalEmployeeSuccess">
-                    <strong>Upload Success!</strong> Upload employee global succes.
-                </div>
-            }
-            else
-            {
-                <div class="alert alert-danger " id="divUploadGlobalEmployeeUnSuccess">
-                    <strong>Upload Unsuccess!</strong> Upload employee global unsucces.
-                </div>
-            }
-        }
-    </div>
-}
+<section class="col-lg connectedSortable">
 
-@using (Html.BeginForm("UploadGlobalTraining", "Upload", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    <div class="custom-file-upload row">
-        <div class="col-md-8">
-            <label for="file">Upload global training: </label>
-            <input type="file" id="fileDataTraining" name="upload" accept=".xlsx" />
+    <div class="box box-primary">
+        <div class="box-header">
+            <i class="fa fa-calendar-o"></i>
+            <h3 class="box-title">Upload</h3>
         </div>
-        <div class="col-md-4">
-            <input type="submit" value="Update" class="btn btn-primary" />
-        </div>
-    </div>
-    <div>
-        @if (ViewBag.MessageGlobalTraining != null)
-        {
-            if (ViewBag.MessageGlobalTraining == "success")
-            {
-                <div class="alert alert-success " id="divUploadTrainingBasicSuccess">
-                    <strong>Upload Success!</strong> Upload training basic succes.
-                </div>
-            }
-            else
-            {
-                <div class="alert alert-danger " id="divUploadTrainingBasicUnSuccess">
-                    <strong>Upload Unsuccess!</strong> Upload training basic unsucces.
-                </div>
-            }
-        }
-    </div>
-}
 
-@using (Html.BeginForm("UploadLocalEmployee", "Upload", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    <div class="custom-file-upload row">
-        <div class="col-md-8">
-            <label for="file">Upload local employees: </label>
-            <input type="file" id="dataLocalEmployee" name="upload" accept=".xlsx" />
+        <div class="box-footer clearfix">
+            footer
         </div>
-        <div class="col-md-4">
-            <input type="submit" value="Update" class="btn btn-primary" id="btnUploadLocalEmployees"/>
-        </div>
-    </div>
-    <div>
-        @if (ViewBag.MessageUploadLocalEmpoyee != null)
-        {
-            if (ViewBag.MessageUploadLocalEmpoyee == "success")
+        <!-- /.box-header -->
+        <div class="box-body">
+
+            @using (Html.BeginForm("UploadGlobalEmployee", "Upload", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
-                <div class="alert alert-success " id="divUploadLocalEmployeeSuccess">
-                    <strong>Upload Success!</strong> Upload employee local succes.
+                <div class="custom-file-upload row">
+                    <div class="col-md-7">
+                        <label for="file"><i class="fa fa-file-excel-o"></i> Global employees: </label>
+                        <input type="file" id="dataFileGlobalEmployee" name="upload" accept=".xlsx" />
+                    </div>
+                    <div class="col-md-2">
+                        <input type="submit" value="Upload" class="btn btn-block btn-primary btn-flat" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-9">
+                        @if (ViewBag.MessageUploadGlobalEmployee != null)
+                        {
+                            if (ViewBag.MessageUploadGlobalEmployee == "success")
+                            {
+                                <div class="alert alert-success alert-div" id="divUploadGlobalEmployeeSuccess">
+                                    <strong>Upload Success!</strong> Upload employee global succes.
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="alert alert-danger alert-div" id="divUploadGlobalEmployeeUnSuccess">
+                                    <strong>Upload Unsuccess!</strong> Upload employee global unsucces.
+                                </div>
+                            }
+                        }
+                    </div>
                 </div>
             }
-            else
+
+            @using (Html.BeginForm("UploadLocalEmployee", "Upload", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
-                <div class="alert alert-danger " id="divUploadLocalEmployeeUnSuccess">
-                    <strong>Upload Unsuccess!</strong> Upload employee local unsucces - ViewBag.MessageUploadLocalEmpoyee.
+                <div class="custom-file-upload row">
+                   
+                    <div class="col-md-7">
+                        <label for="file"><i class="fa fa-file-excel-o"></i>Upload local employees: </label>
+                        <input type="file" id="dataLocalEmployee" name="upload" accept=".xlsx" />
+                    </div>
+                    <div class="col-md-2">
+                        <input type="submit" value="Upload" class="btn btn-block btn-primary btn-flat" id="btnUploadLocalEmployees" />
+                    </div>
+                 
+                </div>
+                <div class="row alert-div">
+                    <div class="col-md-9">
+                        @if (ViewBag.MessageUploadLocalEmpoyee != null)
+                {
+                    if (ViewBag.MessageUploadLocalEmpoyee == "success")
+                    {
+                                <div class="alert alert-success " id="divUploadLocalEmployeeSuccess">
+                                    <strong>Upload Success!</strong> Upload employee local succes.
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="alert alert-danger " id="divUploadLocalEmployeeUnSuccess">
+                                    <strong>Upload Unsuccess!</strong> Upload employee local unsucces - ViewBag.MessageUploadLocalEmpoyee.
+                                </div>
+                            }
+                        }
+                    </div>
                 </div>
             }
-        }
+            <!-- /.box-body -->
+        </div>
     </div>
-}
-<style>
-    .custom-file-upload {
-        display: block;
-        width: auto;
-        font-size: 16px;
-        margin-top: 30px;
-        border: 1px solid #ccc;
-    }
-</style>
+
+
+</section>
